@@ -38,19 +38,37 @@
             
         </header>
         <center>
-            <h1>
-            Comfy Tower Defense
-            </h1>
-        </center>
-        <center>
             <img id="main_menu" src="img/title.png" style="width:50%"></img>
         </center>
+-
         <canvas id="main_canvas" style="width:100%; height:100%"></canvas>
+        
+        <div id="ui_bar"> 
+            <img id="ui_bar_logo" src="img/ACRONYM.png" style="width: 64px; height:64px;">
+            <!-- left elements -->
+            <button id="tower1" class="tower_selector">
+                tower1
+            </button>
+            <button id="tower2" class="tower_selector">
+                tower2
+            </button>
+
+            <!-- right elements -->
+            <button id="next_wave" class="wave_control">
+                next wave
+            </button>
+            <button id="fastwave" class="wave_control">
+                >>
+            </button>
+
+        </div>
         
         <div style="display:none;">
             <img id="blank_img" src="img/blank.png">
             <img id="snowflake_img" src="img/snowflake.png">
             <img id="snowflake_yellow_img" src="img/snowflake_yellow.png">
+            <img id="oven_img" src="img/oven.png">
+            <img id="background_img" src="img/background.png">
           </div>
     </body>
 </html>

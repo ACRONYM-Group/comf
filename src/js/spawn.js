@@ -1,4 +1,4 @@
-var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0, 1], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
+var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
 
 function spawn_new_enemy()
 {
