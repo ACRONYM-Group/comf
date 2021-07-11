@@ -7,8 +7,8 @@ var enemy_types = [
 
 function spawn_new_enemy()
 {
-    let v = ["snowflake", "snowflake_yellow"][Math.trunc((Math.random()) * spawn_state.power_modifier)];
-    enemies.push(new enemy(1, spawn_state.paths[Math.trunc(spawn_state.paths.length * Math.random())], .03 * spawn_state.difficulty, v));
+    let v = enemy_types[Math.trunc((Math.random()) * spawn_state.power_modifier)];
+    enemies.push(new enemy(v.health, spawn_state.paths[Math.trunc(spawn_state.paths.length * Math.random())], .03 * spawn_state.difficulty * v.speed, v.img, v.cost));
 }
 
 function spawn_enemy_tick()

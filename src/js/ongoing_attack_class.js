@@ -8,6 +8,7 @@ class ongoing_attack {
         this.speed = 0.35;
         this.target_random_id = enemies[this.target].random_id;
         this.img = "cookie";
+        this.img_type = "png";
 
         this.x = x;
         this.y = y;

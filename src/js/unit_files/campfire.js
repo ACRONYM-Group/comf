@@ -16,7 +16,7 @@ var tower_campfire = {
                     enemies[i].damage(1);
                 }
             }
-            this.timer = 60;
+            this.timer = 240;
         }
     },
     "img":"campfire",

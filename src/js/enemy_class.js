@@ -9,6 +9,7 @@ class enemy {
         this.img = img;
         this.cost = cost;
         this.max_health = health;
+        this.img_type = "png";
         this.move();
     }
 
