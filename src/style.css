@@ -1,3 +1,4 @@
+/* meta */
 body
 {
     overflow: hidden;
@@ -22,6 +23,7 @@ html
 z-index: 1;
 }
 
+/*bottom bar */
 #ui_bar 
 {
     position: fixed;
@@ -33,6 +35,8 @@ z-index: 1;
 
 #ui_bar_logo
 {
+    width: 64px; 
+    height:64px;
     float: left;
     background-color:black
 }
@@ -49,13 +53,76 @@ z-index: 1;
     float: right;
     height: 100%;
     width: 64px;
+
+    border: none;
+    background-color: black;
+    border-radius: 5px;
 }
+
+.button_disabled
+{
+    background-color: grey;
+}
+
 
 .info_box
 {
     float: right;
     height: 100%;
     width: 64px;
+}
+
+#wave_counter
+{
+    background-color:rgb(204, 204, 204);
+    height:64px;
+    width:64px;
+}
+
+#wave_1
+{
+    position:absolute;
+    font-size: 26px;
+    margin-left: 0px;
+    margin-top: 2px;
+}
+
+#wave_2
+{
+    position:absolute;
+    font-size: 40px;
+    margin-left: 22px;
+    margin-top: 25px;
+}
+
+#chc
+{
+    width:64px;
+    height:64px;
+}
+
+#chc p
+{
+
+    position: absolute;
+    color:rgb(0, 0, 0);
+    margin-left: 23px;
+    margin-top: 8px;
+    font-size: 221%;
+}
+
+#chc img
+{
+    float: absolute;
+}
+
+/* top bar */
+/* Navbar container */
+#navbar
+{
+    display: flex;
+    background-color:  #111;
+    font-family: Arial;
 }
 
 /* Navbar container */
@@ -70,10 +137,9 @@ z-index: 1;
 .navbar a 
 {
     float: left;
-    font-size: 16px;
+    font-size: 28px;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
@@ -147,7 +213,7 @@ z-index: 1;
 {
     margin: 5px;
     margin-left: 8px;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 
 .logoDiv 
@@ -181,4 +247,18 @@ z-index: 1;
     margin-left:20px; 
     background-color:black; 
     width:65px;
+}
+
+.bottom-button
+{
+    border: none;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.bottom-button-disable
+{
+    border: none;
+    background-color: grey;
+    border-radius: 5px;
 }

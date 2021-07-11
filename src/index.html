@@ -22,7 +22,7 @@
             <div class="flexbox">
                 <div class="logoDiv" style="position: relative;">
                     <a href="/index.dpy" style="display:flex; padding:0; margin-left:10px;">
-                    <img src="img/ACRONYM.png" style="width: 40px; height:40px;">
+                    <img src="img/ACRONYM.png" style="width: 52px; height:52x;">
                     <h3 class="logo">ACRONYM</h3>
                     </a>
                 </div>
@@ -39,6 +39,7 @@
                 </div>
             
         </header>
+
         <center>
             <h1 id="cold_hard_cash_display"></h1>
             <img id="main_menu" src="img/title.png" style="width:50%"></img>
@@ -46,7 +47,7 @@
         <canvas id="main_canvas" style="width:100%; height:100%"></canvas>
         
         <div id="ui_bar"> 
-            <img id="ui_bar_logo" src="img/ACRONYM.png" style="width: 64px; height:64px;">
+            <img id="ui_bar_logo" src="img/ACRONYM.png" >
             <!-- left elements -->
             <button id="tower1" class="tower_selector">
                 tower1
@@ -56,13 +57,26 @@
             </button>
 
             <!-- right elements -->
-            <button id="next_wave" class="wave_control">
+            <div id="wave_counter" class="info_box">
+                <p id="wave_1">
+                    Wave
+                </p>
+                <p id="wave_2">
+                    0
+                </p>
+            </div>
+            <div id="chc" class="info_box">
+                <p>
+                        0
+                </p>
+                <img src="img/CHC.png">
+            </div>
+            <button id="next_wave" class="wave_control" onclick="next_wave()">
                 next wave
             </button>
-            <button id="fastwave" class="wave_control">
+            <button id="fastwave" class="wave_control" onclick="is_speed = !is_speed">
                 >>
             </button>
-
         </div>
         
         <div style="display:none;">

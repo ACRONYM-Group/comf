@@ -8,6 +8,8 @@ var grid_size = 32;
 
 var game_objects = [new tower(0, 0, 10.0, tower_oven)];
 
+var is_speed = false;
+
 function draw()
 {
 
@@ -53,7 +55,7 @@ function draw_game(canvas, ctx)
 
     for (e in enemies)
     {
-        draw_game_object(enemies[e], canvas, ctx);
+        draw_game_object(enemies[e], canvas, ctx, undefined, undefined, undefined, enemies[e].scale());
     }
 
     for (e in ongoing_attacks)
@@ -74,16 +76,17 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
+function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
 {
     if (typeof angle === "undefined")
     {
         angle = 0;
     }
 
-    if (obj.img === "blank")
+    if (typeof scale === "undefined")
     {
         //console.log(obj);
+        scale = 1;
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -197,10 +200,26 @@ function main_loop()
 {
     draw();
 
-    if (game_state == "in_game")
+    let count = 1;
+
+    if (is_speed)
     {
-        tick_game();
-        spawn_enemy_tick();
+        count = 3;
+
+        document.getElementById("fastwave").classList.remove("button_disabled");
+    }
+    else
+    {
+        document.getElementById("fastwave").classList.add("button_disabled");
+    }
+
+    for (let i = 0; i < count; i += 1)
+    {
+        if (game_state == "in_game")
+        {
+            tick_game();
+            spawn_enemy_tick();
+        }
     }
 }
 
@@ -256,6 +275,7 @@ window.onload = function()
     }
     
 }
+
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   }
