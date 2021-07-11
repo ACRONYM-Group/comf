@@ -108,14 +108,6 @@ function get_image(img_name)
 function main_loop()
 {
     draw();
-<<<<<<< HEAD
-    
-    for (unit in enemies)
-    {
-        unit.move();
-    }
-=======
->>>>>>> 48111d52ef07ef64cc381743a6cf10dd0cde832f
 
     if (game_state == "in_game")
     {
