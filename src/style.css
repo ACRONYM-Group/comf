@@ -1,10 +1,16 @@
 body
 {
+    overflow: hidden;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    height: 100%;
+}
+
+html
+{
+    height: 100%;
 }
 
 #main_menu {
-    position: absolute;
-    left:0;
-    top:150;
+z-index: 1
 }
