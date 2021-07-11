@@ -29,8 +29,6 @@ var tower_oven = {
             if (this.timer <= 0)
             {
                 let attack = new ongoing_attack(this.x, this.y, "enemy", best_i);
-    
-                //console.log(attack);
             
                 ongoing_attacks.push(attack);
     
