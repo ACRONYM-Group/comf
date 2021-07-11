@@ -37,7 +37,7 @@ class ongoing_attack {
             var target_y = 0;
         }
 
-        this.distance = Math.sqrt(((target_x + source_x)**2)+((target_y + source_y)**2));
+        this.distance = Math.sqrt(((target_x - source_x)**2)+((target_y - source_y)**2));
 
         if (this.progress >= this.distance) {
             if (this.target_type == "enemy") {

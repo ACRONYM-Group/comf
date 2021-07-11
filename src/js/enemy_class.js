@@ -7,6 +7,7 @@ class enemy {
         this.point_number = 0;
         this.point_progress = 0;
         this.speed = speed;
+        this.should_be_destroyed = false;
     }
 
     move () {
@@ -21,10 +22,17 @@ class enemy {
                 this.point_number += 1;
             }
 
-            this.x = paths[this.path_number][this.point_number].x + (this.point_progress/current_segment_length)*current_segment_x_range*grid_size;
-            this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range*grid_size;
+            this.x = paths[this.path_number][this.point_number].x + (this.point_progress/current_segment_length)*current_segment_x_range;
+            this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range;
+
+        } else {
+            this.destroy();
         }
         
+    }
+
+    destroy() {
+        this.should_be_destroyed = true;
     }
 
     find_path_length (path_number, point_number) {
@@ -32,7 +40,7 @@ class enemy {
         if (point_number < paths[path_number].length-1) {
             var first_point = paths[path_number][point_number];
             var second_point = paths[path_number][point_number+1];
-            var distance = Math.sqrt(((first_point.x + second_point.x)**2)+((first_point.y + second_point.y)**2));
+            var distance = Math.sqrt(((first_point.x - second_point.x)**2)+((first_point.y - second_point.y)**2));
         }
         return distance;
     }

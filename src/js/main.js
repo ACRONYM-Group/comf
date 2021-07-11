@@ -45,14 +45,9 @@ function draw_game(canvas, ctx)
     ctx.fillStyle = "blue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    game_objects.forEach(function (item, index)
-    {
-        draw_game_object(item, canvas, ctx);
-    });
-
     for (e in enemies)
     {
-        draw_game_object(e, canvas, ctx);
+        draw_game_object(enemies[e], canvas, ctx);
     }
 }
 
@@ -79,6 +74,9 @@ function tick_game()
 {
     for (index in enemies) {
         enemies[index].move();
+        if (enemies[index].should_be_destroyed) {
+            enemies.splice(index, 1);
+        }
 
     }
 }
@@ -115,7 +113,14 @@ function main_loop()
     }
 }
 
+function create_enemies() {
+    enemies.push(new enemy(0, 0, .03))
+    enemies.push(new enemy(0, 1, .03))
+}
+
 setInterval(main_loop, (1000/60));
+
+setInterval(create_enemies, 2000);
 
 window.onload = function()
 {
