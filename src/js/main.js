@@ -16,6 +16,8 @@ var cursor_pos = {"x": 3, "y": 3};
 
 var path = [];
 
+var autostart = false;
+
 function draw()
 {
 
