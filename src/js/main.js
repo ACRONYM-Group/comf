@@ -1,11 +1,12 @@
 var global_canvas = undefined;
 var global_image = undefined;
+var global_images = {};
 
 var game_state = "menu";
 
 var grid_size = 50;
 
-var game_objects = [{"pos": {"x":0, "y":0}}, {"pos": {"x":-1, "y":0}}, {"pos": {"x":1, "y":0}}];
+var game_objects = [{"pos": {"x":0, "y":0}, "img": "blank"}, {"pos": {"x":-1, "y":0}, "img": "blank"}, {"pos": {"x":1, "y":0}, "img": "blank"}];
 
 function draw()
 {
@@ -48,6 +49,11 @@ function draw_game(canvas, ctx)
     {
         draw_game_object(item, canvas, ctx);
     });
+
+    for (e in enemies)
+    {
+        draw_game_object(e, canvas, ctx);
+    }
 }
 
 function grid_to_coord(grid_pos, canvas)
@@ -62,9 +68,11 @@ function draw_game_object(obj, canvas, ctx)
     width = 25;
     height = 25;
 
-    pos = grid_to_coord(obj.pos, canvas);
+    pos = grid_to_coord(e, canvas);
 
-    ctx.fillRect(Math.round(pos.x - width / 2), Math.round(pos.y - height / 2), width, height);
+    img = get_image("blank");
+
+    ctx.drawImage(img, pos.x - img.width / 2, pos.y - img.height / 2);
 }
 
 function tick_game()
@@ -80,9 +88,34 @@ function switch_to_game()
     game_state = "in_game";
 }
 
+function get_image(img_name)
+{
+    if (typeof global_images[img_name] === "undefined")
+    {
+        img = document.getElementById(img_name + "_img");
+
+        if (img === null)
+        {
+            alert("Unable to load image " + img_name)
+        }
+
+        global_images[img_name] = img;
+    }
+
+    return global_images[img_name];
+}
+
 function main_loop()
 {
     draw();
+<<<<<<< HEAD
+    
+    for (unit in enemies)
+    {
+        unit.move();
+    }
+=======
+>>>>>>> 48111d52ef07ef64cc381743a6cf10dd0cde832f
 
     if (game_state == "in_game")
     {
