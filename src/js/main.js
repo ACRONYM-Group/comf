@@ -6,7 +6,7 @@ var game_state = "menu";
 
 var grid_size = 50;
 
-var game_objects = [{"pos": {"x":0, "y":0}, "img": "blank"}, {"pos": {"x":-1, "y":0}, "img": "blank"}, {"pos": {"x":1, "y":0}, "img": "blank"}];
+var game_objects = [new tower(0, 0, 10.0)];
 
 function draw()
 {
@@ -54,6 +54,10 @@ function draw_game(canvas, ctx)
     {
         draw_game_object(ongoing_attacks[e], canvas, ctx);
     }
+    for (t in game_objects)
+    {
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health);
+    }
 }
 
 function grid_to_coord(grid_pos, canvas)
@@ -61,18 +65,24 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx)
+function draw_game_object(obj, canvas, ctx, health_bar)
 {
-    ctx.fillStyle = "red";
-
-    width = 25;
-    height = 25;
-
     pos = grid_to_coord(obj, canvas);
 
-    img = get_image("blank");
+    img = get_image(obj.img);
 
     ctx.drawImage(img, pos.x - img.width / 2, pos.y - img.height / 2);
+
+    if (typeof health_bar !== "undefined")
+    {
+        ctx.fillStyle = "grey";
+
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8, grid_size * 0.15);
+
+        ctx.fillStyle = "green";
+
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8 * health_bar, grid_size * 0.15);
+    }
 }
 
 function tick_game()
@@ -80,7 +90,8 @@ function tick_game()
     for (index in enemies) {
         enemies[index].tick();
         enemies[index].move();
-        if (enemies[index].should_be_destroyed) {
+        if (enemies[index].should_be_destroyed)
+        {
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
                 console.log(ongoing_attacks[index_2].target);
@@ -102,7 +113,11 @@ function tick_game()
         if (ongoing_attacks[index].should_be_destroyed) {
             ongoing_attacks.splice(index, 1);
         }
+    }
 
+    for (index in game_objects)
+    {
+        game_objects[index].tick();
     }
 }
 
@@ -119,7 +134,7 @@ function get_image(img_name)
 
         if (img === null)
         {
-            alert("Unable to load image " + img_name)
+            alert("Unable to load image " + img_name);
         }
 
         global_images[img_name] = img;
@@ -135,6 +150,7 @@ function main_loop()
     if (game_state == "in_game")
     {
         tick_game();
+        spawn_enemy_tick();
     }
 }
 
@@ -156,6 +172,24 @@ function create_projectiles() {
 
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+function click_canvas(canvas, x, y)
+{
+    x -= canvas.width / 2;
+    y -= canvas.height / 2;
+
+    x /= grid_size;
+    y /= grid_size;
+
+    for (i in game_objects)
+    {
+        g = game_objects[i];
+        if (g.x == Math.trunc(x) && g.y == Math.trunc(y))
+        {
+            return;
+        }
+    }
+
+    game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
 }
 
 setInterval(main_loop, (1000/60));
@@ -170,4 +204,19 @@ window.onload = function()
     {
         switch_to_game();
     }
+
+    document.getElementById("main_canvas").onclick = function(e)
+    {
+        canvas = document.getElementById("main_canvas");
+
+        x = e.x;
+        y = e.y;
+
+        var bbox = canvas.getBoundingClientRect();
+        
+        click_canvas(canvas,  x - bbox.left * (canvas.width  / bbox.width),
+                    y - bbox.top  * (canvas.height / bbox.height)
+        );
+    }
+    
 }

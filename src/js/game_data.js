@@ -18,10 +18,4 @@ paths = [
     ]
 ];
 
-enemies = [
-    new enemy(3, 0, .03),
-    new enemy(3, 1, .03)
-];
-
-
-ongoing_attacks = [];
+enemies = [];

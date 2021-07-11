@@ -1,14 +1,14 @@
 class enemy {
-    constructor (health, path_number, speed) {
+    constructor (health, path_number, speed, img) {
+        this.x = 0;
+        this.y = 0;
         this.health = health;
         this.path_number = path_number;
         this.point_number = 0;
         this.point_progress = 0;
         this.speed = speed;
         this.should_be_destroyed = false;
-        this.random_id = Math.random();
-
-        this.move();
+        this.img = img;
     }
 
     move () {
@@ -53,6 +53,7 @@ class enemy {
             var second_point = paths[path_number][point_number+1];
             var distance = Math.sqrt(((first_point.x - second_point.x)**2)+((first_point.y - second_point.y)**2));
         }
+
         return distance;
     }
 

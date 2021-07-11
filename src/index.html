@@ -3,30 +3,54 @@
     <head>
         <meta charset="utf-8"/>
         <title>Comfy Tower Defense</title>
+        <link rel="icon" 
+        type="image/png" 
+        href="img/hot_cocoa.png">
         <link rel="stylesheet" href="style.css">
-
         <script src="js/enemy_class.js"></script>
         <script src="js/game_data.js"></script>
+        <script src="js/spawn.js"></script>
         <script src="js/point.js"></script>
         <script src="js/tower_class.js"></script>
         <script src="js/ongoing_attack_class.js"></script>
         <script src="js/main.js"></script>
-
     </head>
     <body>
+        <header class="navbar">
+            <div class="flexbox">
+                <div class="logoDiv" style="position: relative;">
+                    <a href="/index.dpy" style="display:flex; padding:0; margin-left:10px;">
+                    <img src="img/ACRONYM.png" style="width: 40px; height:40px;">
+                    <h3 class="logo">ACRONYM</h3>
+                    </a>
+                </div>
+                <div class="dropdownBar"></div>
+                    <div class="dropdown">
+                        <button class="dropbtn">Projects</button>
+                        <div class="dropdown-content">
+                            <a href="/4dTicTacToe/release.dpy">4D Tic Tac Toe</a>
+                            <a href="/Acorn/index.dpy">ACORN</a>
+                            <a href="/quickReference.dpy">Cheat Sheet</a>
+                        </div>
+                    </div>
+                    <a href="https://mail.scienceandpizza.com:444/mail/" class="loginButton">Mail</a>
+                </div>
+            
+        </header>
         <center>
             <h1>
             Comfy Tower Defense
             </h1>
         </center>
         <center>
-            <img id="main_menu" src="http://www.scienceandpizza.com/Images/ACRONYM.png"></img>
+            <img id="main_menu" src="img/title.png" style="width:50%"></img>
         </center>
         <canvas id="main_canvas" style="width:100%; height:100%"></canvas>
         
         <div style="display:none;">
-            <img id="blank_img"
-                 src="img/blank.png">
+            <img id="blank_img" src="img/blank.png">
+            <img id="snowflake_img" src="img/snowflake.png">
+            <img id="snowflake_yellow_img" src="img/snowflake_yellow.png">
           </div>
     </body>
 </html>
