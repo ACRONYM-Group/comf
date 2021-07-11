@@ -2,7 +2,6 @@ var global_canvas = undefined;
 
 function draw()
 {
-    alert("Hello World!");
 
     if (typeof global_canvas === "undefined")
     {
@@ -17,6 +16,7 @@ function draw()
 }
 
 function main_loop() {
+    draw();
 
 }
 
