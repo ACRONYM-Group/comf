@@ -116,6 +116,25 @@ z-index: 1;
     float: absolute;
 }
 
+#next_wave
+{
+    color:rgb(173, 173, 173);
+}
+
+#next_wave:hover
+{
+    color:rgb(255, 255, 255);
+}
+
+#fastwave
+{
+    color:rgb(173, 173, 173);
+}
+
+#fastwave:hover
+{
+    color:rgb(255, 255, 255);
+}
 /* top bar */
 /* Navbar container */
 #navbar
