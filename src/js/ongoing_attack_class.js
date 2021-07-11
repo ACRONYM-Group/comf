@@ -6,8 +6,12 @@ class ongoing_attack {
         this.should_be_destroyed = false;
         this.lock_target = false;
         this.speed = 0.35;
-        this.target_random_id = enemies[this.target].random_id;
-        this.img = "cookie";
+        if (target_type == "enemy") {
+            this.img = "cookie";
+        } else {
+            this.img = "snowball";
+        }
+        
         this.img_type = "png";
 
         this.x = x;
@@ -22,8 +26,8 @@ class ongoing_attack {
                 this.target_x = enemies[this.target].x;
                 this.target_y = enemies[this.target].y;
             } else if (this.target_type == "tower") {
-                this.target_x = towers[this.target].x;
-                this.target_y = towers[this.target].y;
+                this.target_x = game_objects[this.target].x;
+                this.target_y = game_objects[this.target].y;
             } else if (this.target_type == "air") {
                 this.target_x = 0;
                 this.target_y = 0;
@@ -37,10 +41,6 @@ class ongoing_attack {
 
     tick() {
 
-        // if (enemies.length == 0 || enemies[this.target].random_id != this.target_random_id) {
-        //     this.should_be_destroyed = true;
-
-        // }
 
         this.last_target_x = this.target_x;
         this.last_target_y = this.target_y;

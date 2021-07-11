@@ -6,7 +6,7 @@ var game_state = "menu";
 
 var grid_size = 32;
 
-var game_objects = [new tower(-1, 0, 10.0, tower_oven)]; //new tower(0, 0, 10.0, tower_oven)
+var game_objects = [new tower(-1, 0, tower_oven)]; //new tower(0, 0, 10.0, tower_oven)
 
 var is_speed = false;
 
@@ -93,9 +93,10 @@ function draw_game(canvas, ctx)
         draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, range);
     }
 
+    console.log(tower_to_place);
     if (typeof tower_to_place !== "undefined")
     {
-        let obj = new tower(cursor_pos.x, cursor_pos.y, 1, tower_to_place);
+        let obj = new tower(cursor_pos.x, cursor_pos.y, tower_to_place);
         draw_game_object(obj, canvas, ctx, undefined, undefined, obj.range, 1, 0.5);
     }
 }
@@ -126,6 +127,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
 
     pos = grid_to_coord(obj, canvas);
 
+    console.log(obj);
     img = get_image(obj.img);
 
     ctx.save();
@@ -336,7 +338,7 @@ function click_canvas(canvas, x, y)
         }
 
         if (cold_hard_cash >= tower_to_place.cost) {
-            game_objects.push(new tower(Math.round(x), Math.round(y), 10, tower_to_place));
+            game_objects.push(new tower(Math.round(x), Math.round(y), tower_to_place));
             cold_hard_cash -= tower_to_place.cost;
         }
     }

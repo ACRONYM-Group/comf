@@ -1,11 +1,11 @@
 class tower {
-    constructor (x, y, max_health, type)
+    constructor (x, y, type)
     {
         this.x = x;
         this.y = y;
 
-        this.max_health = max_health;
-        this.health = max_health;
+        this.max_health = type.health;
+        this.health = type.health;
 
         this.img = type.img;
 

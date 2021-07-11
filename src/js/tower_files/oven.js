@@ -49,5 +49,6 @@ var tower_oven = {
     "img":"oven",
     "img_type":"png",
     "range":7,
-    "cost":100
+    "cost":100,
+    "health":20.0
 }

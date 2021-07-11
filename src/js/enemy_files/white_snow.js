@@ -1,4 +1,7 @@
 var enemy_white_snow = {
+    "attack": function() {
+
+    },
     "type":"white_snowflake",
     "img":"snowflake",
     "img_type":"png",
