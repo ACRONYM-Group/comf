@@ -44,6 +44,8 @@ function spawn_enemy_tick()
     {
         document.getElementById("next_wave").onclick = next_wave;
         document.getElementById("next_wave").classList.remove("button_disabled");
+
+        is_speed = false;
     }
 }
 

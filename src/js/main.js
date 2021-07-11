@@ -8,6 +8,8 @@ var grid_size = 50;
 
 var game_objects = [new tower(0, 0, 10.0)];
 
+var is_speed = false;
+
 function draw()
 {
 
@@ -179,10 +181,26 @@ function main_loop()
 {
     draw();
 
-    if (game_state == "in_game")
+    let count = 1;
+
+    if (is_speed)
     {
-        tick_game();
-        spawn_enemy_tick();
+        count = 3;
+
+        document.getElementById("fastwave").classList.remove("button_disabled");
+    }
+    else
+    {
+        document.getElementById("fastwave").classList.add("button_disabled");
+    }
+
+    for (let i = 0; i < count; i += 1)
+    {
+        if (game_state == "in_game")
+        {
+            tick_game();
+            spawn_enemy_tick();
+        }
     }
 }
 
