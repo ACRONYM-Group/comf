@@ -10,7 +10,11 @@ class enemy {
         this.cost = type.cost;
         this.max_health = type.health;
         this.img_type = type.img_type;
+        this.attack = type.attack;
+        this.timer = 0;
+        this.range = type.range;
         this.move();
+        
     }
 
     move () {
@@ -48,6 +52,8 @@ class enemy {
             this.should_be_destroyed = true;
             cold_hard_cash += this.cost;
         }
+
+        this.attack();
     }
 
     find_path_length (path_number, point_number) {
