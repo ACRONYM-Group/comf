@@ -13,13 +13,10 @@ function spawn_new_enemy()
 
 function spawn_enemy_tick()
 {
-    console.log("Spawn_enemy_tick");
     if (spawn_state.in_wave)
     {
-        console.log("in_wave");
         if (spawn_state.remaining <= 0.0)
         {
-            console.log("Enemies Remaining");
             spawn_new_enemy();
 
             spawn_state.remaining = spawn_state.rate * (1.0 + (Math.random() - 0.5) * spawn_state.variance);

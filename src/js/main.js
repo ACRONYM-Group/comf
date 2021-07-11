@@ -14,6 +14,8 @@ var tower_to_place = undefined;
 
 var cursor_pos = {"x": 3, "y": 3};
 
+var path = [];
+
 function draw()
 {
 
@@ -103,8 +105,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
 
     if (typeof scale === "undefined")
     {
-        //console.log(obj);
-        //scale = 1;
+        scale = 1;
     }
 
     if (typeof alpha === "undefined")
@@ -120,8 +121,6 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
 
     x_ratio = background_width/1920;
     y_ratio = background_height/1080;
-
-    console.log(pos.x + " - " + pos.y);
 
     ctx.translate(pos.x, pos.y);
 
@@ -266,18 +265,20 @@ function getRandomInRange(min, max) {
 
 function click_canvas(canvas, x, y)
 {
+    x -= canvas.width / 2;
+    y -= canvas.height / 2;
+
+    x_ratio = background_width/1920;
+    y_ratio = background_height/821;
+
+    y += 58
+
+    x /= grid_size*x_ratio;
+    y /= grid_size*y_ratio;
+    
     if (typeof tower_to_place !== "undefined")
     {
-        x -= canvas.width / 2;
-        y -= canvas.height / 2;
-
-        x_ratio = background_width/1920;
-        y_ratio = background_height/821;
-
-        y += 58
-
-        x /= grid_size*x_ratio;
-        y /= grid_size*y_ratio;
+        
 
 
         for (i in game_objects)
@@ -293,6 +294,12 @@ function click_canvas(canvas, x, y)
             game_objects.push(new tower(Math.round(x), Math.round(y), 10, tower_to_place));
             cold_hard_cash -= 100;
         }
+    }
+    else
+    {
+        path.push({"x": x, "y": y});
+
+        console.log(path);
     }
 }
 

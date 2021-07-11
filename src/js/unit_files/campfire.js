@@ -10,7 +10,6 @@ var tower_campfire = {
         
                 let dist = Math.pow(this.x - e.x, 2.0) + Math.pow(this.y - e.y, 2.0);
         
-                console.log(dist);
                 if (dist < this.range)
                 {
                     enemies[i].damage(1);
