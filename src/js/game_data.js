@@ -19,3 +19,5 @@ paths = [
 ];
 
 enemies = [];
+
+ongoing_attacks = [];

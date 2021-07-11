@@ -154,10 +154,10 @@ function main_loop()
     }
 }
 
-function create_enemies() {
-    enemies.push(new enemy(3, 0, .06))
-    enemies.push(new enemy(3, 1, .06))
-}
+// function create_enemies() {
+//     enemies.push(new enemy(3, 0, .06, "snow"))
+//     enemies.push(new enemy(3, 1, .06))
+// }
 
 function create_projectiles() {
 
@@ -172,6 +172,7 @@ function create_projectiles() {
 
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function click_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
@@ -194,9 +195,9 @@ function click_canvas(canvas, x, y)
 
 setInterval(main_loop, (1000/60));
 
-setInterval(create_enemies, 500);
+// setInterval(create_enemies, 500);
 
-setInterval(create_projectiles, 100);
+// setInterval(create_projectiles, 100);
 
 window.onload = function()
 {
