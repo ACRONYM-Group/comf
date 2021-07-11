@@ -10,6 +10,10 @@ var game_objects = [new tower(0, 0, 10.0)];
 
 function draw()
 {
+
+    cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
+    cold_hard_cash_display.innerText = cold_hard_cash;
+
     if (typeof global_canvas === "undefined")
     {
         global_canvas = document.getElementById("main_canvas");
@@ -105,6 +109,7 @@ function tick_game()
         enemies[index].move();
         if (enemies[index].should_be_destroyed)
         {
+            cold_hard_cash += 1;
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
                 console.log(ongoing_attacks[index_2].target);
@@ -189,7 +194,11 @@ function click_canvas(canvas, x, y)
         }
     }
 
-    game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
+    if (cold_hard_cash >= 20) {
+        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
+        cold_hard_cash -= 20;
+    }
+    
 }
 
 setInterval(main_loop, (1000/60));
