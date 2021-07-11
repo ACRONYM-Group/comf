@@ -127,7 +127,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
 
     ctx.rotate(angle);
     if (obj.img_type == "png") {
-        ctx.drawImage(img, - img.width / 2, - img.height / 2);
+        ctx.drawImage(img, - img.width * scale / 2, - img.height * scale / 2, img.width * scale, img.height * scale);
         // var ctx = global_canvas.getContext("2d");
         // ctx.strokeStyle = "red";
         // ctx.beginPath();
@@ -138,7 +138,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
         // ctx.stroke();
     } else if (obj.img_type == "spritesheet") {
         ctx.translate(0, 105);
-        ctx.drawImage(img, 0, (obj.frame_number*16), 16, 16, - img.width / 2, - img.height / 2, 16, 16);
+        ctx.drawImage(img, 0, (obj.frame_number*16), 16, 16, - img.width * scale / 2, - img.height * scale / 2, 16 * scale, 16 * scale);
         obj.frame_timer += 1;
         if (obj.frame_timer >= 10) {
             obj.frame_timer = 0;
