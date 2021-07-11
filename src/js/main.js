@@ -46,6 +46,7 @@ function draw()
 
 function draw_game(canvas, ctx)
 {
+    
     back = get_image("background");
     ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - back.height / 2);
 
@@ -58,9 +59,10 @@ function draw_game(canvas, ctx)
     {
         draw_game_object(ongoing_attacks[e], canvas, ctx);
     }
+
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, game_objects[t].range);
     }
 }
 
@@ -69,11 +71,16 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar, angle)
+function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
 {
     if (typeof angle === "undefined")
     {
         angle = 0;
+    }
+
+    if (obj.img === "blank")
+    {
+        console.log(obj);
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -99,6 +106,15 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle)
         ctx.fillStyle = "green";
 
         ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8 * health_bar, grid_size * 0.15);
+    }
+    
+    if (typeof range !== "undefined")
+    {
+        r = range * grid_size;
+        ctx.fillStyle = "#E0C0C040";
+        ctx.beginPath();
+        ctx.ellipse(pos.x, pos.y, r, r, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.fill();
     }
 }
 
@@ -225,3 +241,6 @@ window.onload = function()
     }
     
 }
+window.onbeforeunload = function () {
+    window.scrollTo(0, 0);
+  }

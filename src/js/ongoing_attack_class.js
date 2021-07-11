@@ -1,7 +1,5 @@
 class ongoing_attack {
     constructor(x, y, target_type, target) {
-        this.source = source;
-        this.source_type = source_type;
         this.target = target;
         this.target_type = target_type;
         this.progress = 0;
@@ -9,7 +7,7 @@ class ongoing_attack {
         this.lock_target = false;
         this.speed = 0.15;
         this.target_random_id = enemies[this.target].random_id;
-        this.img = "blank";
+        this.img = "cookie";
 
         // if (this.source_type == "enemy") {
         //     this.source_x = enemies[this.source].x;
@@ -52,7 +50,7 @@ class ongoing_attack {
 
     tick() {
 
-        if (enemies[this.target].random_id != this.target_random_id) {
+        if (enemies.length == 0 || enemies[this.target].random_id != this.target_random_id) {
             this.should_be_destroyed = true;
 
         }
