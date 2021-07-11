@@ -1,3 +1,4 @@
+/* meta */
 body
 {
     overflow: hidden;
@@ -22,6 +23,7 @@ html
 z-index: 1;
 }
 
+/*bottom bar */
 #ui_bar 
 {
     position: fixed;
@@ -33,6 +35,8 @@ z-index: 1;
 
 #ui_bar_logo
 {
+    width: 64px; 
+    height:64px;
     float: left;
     background-color:black
 }
@@ -58,6 +62,15 @@ z-index: 1;
     width: 64px;
 }
 
+/* top bar */
+/* Navbar container */
+#navbar
+{
+    display: flex;
+    background-color:  #111;
+    font-family: Arial;
+}
+
 /* Navbar container */
 .navbar 
 {
@@ -70,10 +83,9 @@ z-index: 1;
 .navbar a 
 {
     float: left;
-    font-size: 16px;
+    font-size: 28px;
     color: white;
     text-align: center;
-    padding: 14px 16px;
     text-decoration: none;
 }
 
@@ -147,7 +159,7 @@ z-index: 1;
 {
     margin: 5px;
     margin-left: 8px;
-    margin-top: 12px;
+    margin-top: 4px;
 }
 
 .logoDiv 
