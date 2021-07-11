@@ -16,4 +16,5 @@ function spawn_enemy_tick()
     }
 
     spawn_state.remaining -= 1.0;
+    spawn_state.difficulty += 1.0 / 60.0 / 60.0;
 }

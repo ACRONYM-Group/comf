@@ -65,7 +65,7 @@ function draw_game_object(obj, canvas, ctx)
 
     pos = grid_to_coord(obj, canvas);
 
-    img = get_image("blank");
+    img = get_image(obj.img);
 
     ctx.drawImage(img, pos.x - img.width / 2, pos.y - img.height / 2);
 }

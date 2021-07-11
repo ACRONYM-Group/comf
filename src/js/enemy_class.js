@@ -8,6 +8,7 @@ class enemy {
         this.point_progress = 0;
         this.speed = speed;
         this.should_be_destroyed = false;
+        this.img = "snowflake";
     }
 
     move () {
