@@ -60,7 +60,8 @@ function draw_game(canvas, ctx)
     document.getElementById("chc_counter_value").innerHTML = cold_hard_cash;
     document.getElementById("wave_2").innerHTML = spawn_state.wave;
 
-    back = get_image("Wintry_Forest");
+    back = get_image("Lizs_forest_post-logging");
+    console.log(canvas.width);
     ctx.drawImage(back, 0, 0,canvas.width,canvas.height-116);
     background_width = canvas.width;
     background_height = canvas.height-116;
