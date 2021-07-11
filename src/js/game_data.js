@@ -16,9 +16,12 @@ paths = [
         {"x":-10, "y":0},
         {"x":-15, "y":-5}
     ]
-]
+];
 
 enemies = [
-    new enemy(0, 0, .03),
-    new enemy(0, 1, .03)
-]
+    new enemy(3, 0, .03),
+    new enemy(3, 1, .03)
+];
+
+
+ongoing_attacks = [];

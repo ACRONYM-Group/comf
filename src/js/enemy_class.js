@@ -1,13 +1,14 @@
 class enemy {
     constructor (health, path_number, speed) {
-        this.x = 0;
-        this.y = 0;
         this.health = health;
         this.path_number = path_number;
         this.point_number = 0;
         this.point_progress = 0;
         this.speed = speed;
         this.should_be_destroyed = false;
+        this.random_id = Math.random();
+
+        this.move();
     }
 
     move () {
@@ -26,13 +27,23 @@ class enemy {
             this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range;
 
         } else {
-            this.destroy();
+            //this.destroy();
         }
         
     }
 
     destroy() {
         this.should_be_destroyed = true;
+    }
+
+    damage(amount) {
+        this.health -= amount;
+    }
+
+    tick() {
+        if (this.health <= 0) {
+            this.should_be_destroyed = true;
+        }
     }
 
     find_path_length (path_number, point_number) {
