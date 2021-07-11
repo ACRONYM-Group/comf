@@ -12,6 +12,13 @@ html
     height: 100%;
 }
 
+#cold_hard_cash_display {
+    position: fixed;
+    top:100px;
+    left:100px;
+
+}
+
 #main_menu {
 z-index: 1;
 }

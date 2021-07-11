@@ -1,15 +1,13 @@
 class ongoing_attack {
     constructor(x, y, target_type, target) {
-        this.source = source;
-        this.source_type = source_type;
         this.target = target;
         this.target_type = target_type;
         this.progress = 0;
         this.should_be_destroyed = false;
         this.lock_target = false;
-        this.speed = 0.15;
+        this.speed = 0.35;
         this.target_random_id = enemies[this.target].random_id;
-        this.img = "blank";
+        this.img = "cookie";
 
         // if (this.source_type == "enemy") {
         //     this.source_x = enemies[this.source].x;
@@ -35,27 +33,30 @@ class ongoing_attack {
     }
 
     find_target() {
-        if (this.target_type == "enemy") {
-            this.target_x = enemies[this.target].x;
-            this.target_y = enemies[this.target].y;
-        } else if (this.target_type == "tower") {
-            this.target_x = towers[this.target].x;
-            this.target_y = towers[this.target].y;
-        } else if (this.target_type == "air") {
-            this.target_x = 0;
-            this.target_y = 0;
-        } else {
-            this.target_x = 0;
-            this.target_y = 0;
+        if (this.target < enemies.length) {
+            if (this.target_type == "enemy") {
+                this.target_x = enemies[this.target].x;
+                this.target_y = enemies[this.target].y;
+            } else if (this.target_type == "tower") {
+                this.target_x = towers[this.target].x;
+                this.target_y = towers[this.target].y;
+            } else if (this.target_type == "air") {
+                this.target_x = 0;
+                this.target_y = 0;
+            } else {
+                this.target_x = 0;
+                this.target_y = 0;
+            }
         }
+        
     }
 
     tick() {
 
-        if (enemies[this.target].random_id != this.target_random_id) {
-            this.should_be_destroyed = true;
+        // if (enemies.length == 0 || enemies[this.target].random_id != this.target_random_id) {
+        //     this.should_be_destroyed = true;
 
-        }
+        // }
 
         this.last_target_x = this.target_x;
         this.last_target_y = this.target_y;
@@ -89,12 +90,12 @@ class ongoing_attack {
         // ctx.stroke();
 
         
-        if (distance < 0.1) {
+        if (distance < 0.35) {
             if (!this.lock_target) {
                 if (this.target_type == "enemy") {
-                    enemies[this.target].damage(3);
+                    enemies[this.target].damage(1);
                 } else if (this.target_type == "tower") {
-                    towers[this.target].damage(3);
+                    towers[this.target].damage(1);
                 }
             }
             

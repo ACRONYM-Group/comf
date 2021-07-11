@@ -10,6 +10,10 @@ var game_objects = [new tower(0, 0, 10.0)];
 
 function draw()
 {
+
+    cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
+    cold_hard_cash_display.innerText = "$CHC " + cold_hard_cash;
+
     if (typeof global_canvas === "undefined")
     {
         global_canvas = document.getElementById("main_canvas");
@@ -42,21 +46,23 @@ function draw()
 
 function draw_game(canvas, ctx)
 {
+    
     back = get_image("background");
     ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - back.height / 2);
 
     for (e in enemies)
     {
-        draw_game_object(enemies[e], canvas, ctx);
+        draw_game_object(enemies[e], canvas, ctx, undefined, undefined, undefined, enemies[e].scale());
     }
 
     for (e in ongoing_attacks)
     {
         draw_game_object(ongoing_attacks[e], canvas, ctx);
     }
+
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, game_objects[t].range);
     }
 }
 
@@ -65,11 +71,16 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar, angle)
+function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
 {
     if (typeof angle === "undefined")
     {
         angle = 0;
+    }
+
+    if (typeof scale === "undefined")
+    {
+        scale = 1;
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -82,7 +93,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle)
 
     ctx.rotate(angle);
 
-    ctx.drawImage(img, - img.width / 2, - img.height / 2);
+    ctx.drawImage(img, - img.width * scale / 2, - img.height * scale / 2, img.width * scale, img.height * scale);
 
     ctx.restore();
 
@@ -96,6 +107,15 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle)
 
         ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8 * health_bar, grid_size * 0.15);
     }
+    
+    if (typeof range !== "undefined")
+    {
+        r = range * grid_size;
+        ctx.fillStyle = "#E0C0C040";
+        ctx.beginPath();
+        ctx.ellipse(pos.x, pos.y, r, r, Math.PI / 4, 0, 2 * Math.PI);
+        ctx.fill();
+    }
 }
 
 function tick_game()
@@ -107,7 +127,6 @@ function tick_game()
         {
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
-                console.log(ongoing_attacks[index_2].target);
                 if (ongoing_attacks[index_2].target > index) {
                     ongoing_attacks[index_2].target -= 1;
                 }
@@ -178,8 +197,6 @@ function click_canvas(canvas, x, y)
     x /= grid_size;
     y /= grid_size;
 
-    console.log(x + ", " + y);
-
     for (i in game_objects)
     {
         g = game_objects[i];
@@ -189,7 +206,11 @@ function click_canvas(canvas, x, y)
         }
     }
 
-    game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
+    if (cold_hard_cash >= 100) {
+        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
+        cold_hard_cash -= 100;
+    }
+    
 }
 
 setInterval(main_loop, (1000/60));

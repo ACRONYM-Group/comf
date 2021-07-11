@@ -1,5 +1,5 @@
 class enemy {
-    constructor (health, path_number, speed, img) {
+    constructor (health, path_number, speed, img, cost) {
         this.health = health;
         this.path_number = path_number;
         this.point_number = 0;
@@ -7,6 +7,8 @@ class enemy {
         this.speed = speed;
         this.should_be_destroyed = false;
         this.img = img;
+        this.cost = cost;
+        this.max_health = health;
         this.move();
     }
 
@@ -42,6 +44,7 @@ class enemy {
     tick() {
         if (this.health <= 0) {
             this.should_be_destroyed = true;
+            cold_hard_cash += this.cost;
         }
     }
 
@@ -56,5 +59,8 @@ class enemy {
         return distance;
     }
 
-
+    scale()
+    {
+        return Math.max(0.1, Math.max(0, this.health) / this.max_health);
+    }
 }
