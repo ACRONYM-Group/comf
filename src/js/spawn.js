@@ -36,6 +36,7 @@ function spawn_enemy_tick()
 
         if (!spawn_state.in_wave)
         {
+            spawn_state.wave_timer /= spawn_state.difficulty;
             spawn_state.waves_remaining -= 1;
         }
     }
