@@ -34,7 +34,7 @@ var tower_oven = {
             
                 ongoing_attacks.push(attack);
     
-                this.timer = 240;
+                this.timer = 60;
             }
     
             this.timer -= 1;
