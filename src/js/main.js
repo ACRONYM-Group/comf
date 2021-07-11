@@ -32,6 +32,10 @@ function draw()
 function main_loop()
 {
     draw();
+    for (unit in enemies) {
+        unit.move();
+        alert(unit.x + " - " + unit.y);
+    }
 }
 
 setInterval(main_loop, (1000/60));
