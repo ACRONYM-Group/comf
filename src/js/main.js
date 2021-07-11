@@ -58,11 +58,6 @@ function grid_to_coord(grid_pos, canvas)
 
 function draw_game_object(obj, canvas, ctx)
 {
-    ctx.fillStyle = "red";
-
-    width = 25;
-    height = 25;
-
     pos = grid_to_coord(obj, canvas);
 
     img = get_image(obj.img);

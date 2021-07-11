@@ -18,7 +18,4 @@ paths = [
     ]
 ]
 
-enemies = [
-    new enemy(0, 0, .03),
-    new enemy(0, 1, .03)
-]
+enemies = [];
