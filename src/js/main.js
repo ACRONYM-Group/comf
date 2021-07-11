@@ -83,7 +83,14 @@ function draw_game(canvas, ctx)
 
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
+        let range = game_objects[t].range;
+
+        if (!game_objects[t].selected)
+        {
+            range = undefined;
+        }
+
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, range);
     }
 
     if (typeof tower_to_place !== "undefined")
@@ -271,8 +278,34 @@ function main_loop()
     }
 }
 
+function clear_selection()
+{
+    tower_to_place = undefined;
+
+    for (i in game_objects)
+    {
+        game_objects[i].selected = false;
+    }
+}
+
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function click_empty()
+{
+    for (i in game_objects)
+    {
+        let obj = game_objects[i];
+        if (obj.x == cursor_pos.x && obj.y == cursor_pos.y)
+        {
+            game_objects[i].selected = true;
+        }
+        else
+        {
+            game_objects[i].selected = false;
+        }
+    }
 }
 
 function click_canvas(canvas, x, y)
@@ -309,6 +342,8 @@ function click_canvas(canvas, x, y)
     }
     else
     {
+        click_empty();
+
         path.push({"x": x, "y": y});
 
         console.log(path);
@@ -340,13 +375,13 @@ function key_press(e)
 {
     if (e.keyCode === 27)
     {
-        tower_to_place = undefined;
+        clear_selection();
     }
 }
 
 function right_click(e)
 {
-    tower_to_place = undefined;
+    clear_selection();
 
     e.disableDefault();
 }

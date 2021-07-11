@@ -22,6 +22,8 @@ class tower {
         this.frame_timer = 0;
 
         this.img_type = type.img_type;
+
+        this.selected = false;
     }
 
     damage(amount) {
