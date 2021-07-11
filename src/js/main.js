@@ -7,7 +7,6 @@ var game_state = "menu";
 var grid_size = 50;
 
 var game_objects = [new tower(0, 0, 10.0)];
-var ocupied_cells = [];
 
 function draw()
 {
@@ -53,7 +52,6 @@ function draw_game(canvas, ctx)
 
     for (t in game_objects)
     {
-        console.log(game_objects[t]);
         draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health);
     }
 }
@@ -141,11 +139,16 @@ function click_canvas(canvas, x, y)
     x /= grid_size;
     y /= grid_size;
 
-    if (!ocupied_cells.includes([Math.trunc(x), Math.trunc(y)]))
+    for (i in game_objects)
     {
-        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
-        ocupied_cells.push([Math.trunc(x), Math.trunc(y)]);
+        g = game_objects[i];
+        if (g.x == Math.trunc(x) && g.y == Math.trunc(y))
+        {
+            return;
+        }
     }
+
+    game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
 }
 
 setInterval(main_loop, (1000/60));
