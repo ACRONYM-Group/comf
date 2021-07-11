@@ -6,7 +6,7 @@ var game_state = "menu";
 
 var grid_size = 32;
 
-var game_objects = []; //new tower(0, 0, 10.0, tower_oven)
+var game_objects = [new tower(0, 0, 10.0, tower_oven)]; //new tower(0, 0, 10.0, tower_oven)
 
 var is_speed = false;
 
@@ -17,8 +17,8 @@ var cursor_pos = {"x": 3, "y": 3};
 function draw()
 {
 
-    cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
-    cold_hard_cash_display.innerText = "$CHC " + cold_hard_cash;
+    // cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
+    // cold_hard_cash_display.innerText = "$CHC " + cold_hard_cash;
 
     if (typeof global_canvas === "undefined")
     {
@@ -130,16 +130,16 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
     ctx.rotate(angle);
     if (obj.img_type == "png") {
         ctx.drawImage(img, - img.width / 2, - img.height / 2);
-        var ctx = global_canvas.getContext("2d");
-        ctx.strokeStyle = "red";
-        ctx.beginPath();
-        ctx.moveTo(- img.width / 2,  - img.height / 2);
-        ctx.lineTo(- img.width / 2+50,  - img.height / 2);
-        ctx.moveTo(- img.width / 2,  - img.height / 2);
-        ctx.lineTo(- img.width / 2,  - img.height / 2+50);
-        ctx.stroke();
+        // var ctx = global_canvas.getContext("2d");
+        // ctx.strokeStyle = "red";
+        // ctx.beginPath();
+        // ctx.moveTo(- img.width / 2,  - img.height / 2);
+        // ctx.lineTo(- img.width / 2+50,  - img.height / 2);
+        // ctx.moveTo(- img.width / 2,  - img.height / 2);
+        // ctx.lineTo(- img.width / 2,  - img.height / 2+50);
+        // ctx.stroke();
     } else if (obj.img_type == "spritesheet") {
-        //ctx.translate(0, 105);
+        ctx.translate(0, 105);
         ctx.drawImage(img, 0, (obj.frame_number*16), 16, 16, - img.width / 2, - img.height / 2, 16, 16);
         obj.frame_timer += 1;
         if (obj.frame_timer >= 10) {
@@ -271,8 +271,13 @@ function click_canvas(canvas, x, y)
         x -= canvas.width / 2;
         y -= canvas.height / 2;
 
-        x /= grid_size;
-        y /= grid_size;
+        x_ratio = background_width/1920;
+        y_ratio = background_height/821;
+
+        y += 58
+
+        x /= grid_size*x_ratio;
+        y /= grid_size*y_ratio;
 
 
         for (i in game_objects)
@@ -296,8 +301,16 @@ function mouse_canvas(canvas, x, y)
     x -= canvas.width / 2;
     y -= canvas.height / 2;
 
-    x /= grid_size;
-    y /= grid_size;
+
+    x_ratio = background_width/1920;
+    y_ratio = background_height/821;
+
+    y += 58
+
+    x /= grid_size*x_ratio;
+    y /= grid_size*y_ratio;
+
+
 
 
     cursor_pos = {"x": Math.round(x), "y": Math.round(y)};
