@@ -12,7 +12,7 @@ function draw()
 
     if (typeof global_image === "undefined")
     {
-        global_image = document.getElementById("main_canvas")
+        global_image = document.getElementById("image")
     }
 
     if (game_state === "menu")
