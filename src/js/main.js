@@ -256,13 +256,22 @@ function main_loop()
     {
         count = 3;
 
-        document.getElementById("fastwave").classList.add("button_disabled");
+        document.getElementById("fast_wave").classList.add("button_disabled");
     }
     else
     {
-        document.getElementById("fastwave").classList.remove("button_disabled");
+        document.getElementById("fast_wave").classList.remove("button_disabled");
     }
 
+    if (autostart)
+    {
+        document.getElementById("auto_wave").classList.add("button_disabled");
+    }
+    else
+    {
+        document.getElementById("auto_wave").classList.remove("button_disabled");
+    }
+    
     for (let i = 0; i < count; i += 1)
     {
         if (game_state == "in_game")

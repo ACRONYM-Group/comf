@@ -136,6 +136,17 @@ z-index: 1;
     text-align: center;
 }
 
+#auto_wave
+{
+    font-size:150%;
+    color:rgb(173, 173, 173);
+}
+
+#auto_wave:hover
+{
+    color:rgb(255, 255, 255);
+}
+
 #next_wave
 {
     font-size:150%;
@@ -147,7 +158,7 @@ z-index: 1;
     color:rgb(255, 255, 255);
 }
 
-#fastwave
+#fast_wave
 {
     font-size:250%;
     color:rgb(173, 173, 173);
