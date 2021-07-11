@@ -52,7 +52,7 @@ function draw_game(canvas, ctx)
 
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health);
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
     }
 }
 
@@ -61,23 +61,36 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar)
+function draw_game_object(obj, canvas, ctx, health_bar, angle)
 {
+    if (typeof angle === "undefined")
+    {
+        angle = 0;
+    }
+
     pos = grid_to_coord(obj, canvas);
 
     img = get_image(obj.img);
 
-    ctx.drawImage(img, pos.x - img.width / 2, pos.y - img.height / 2);
+    ctx.save();
+
+    ctx.translate(pos.x, pos.y);
+
+    ctx.rotate(angle);
+
+    ctx.drawImage(img, - img.width / 2, - img.height / 2);
+
+    ctx.restore();
 
     if (typeof health_bar !== "undefined")
     {
         ctx.fillStyle = "grey";
 
-        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8, grid_size * 0.15);
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8, grid_size * 0.15);
 
         ctx.fillStyle = "green";
 
-        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8 * health_bar, grid_size * 0.15);
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8 * health_bar, grid_size * 0.15);
     }
 }
 
