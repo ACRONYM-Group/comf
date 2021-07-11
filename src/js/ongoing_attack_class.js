@@ -5,26 +5,9 @@ class ongoing_attack {
         this.progress = 0;
         this.should_be_destroyed = false;
         this.lock_target = false;
-        this.speed = 0.15;
+        this.speed = 0.35;
         this.target_random_id = enemies[this.target].random_id;
         this.img = "cookie";
-
-        // if (this.source_type == "enemy") {
-        //     this.source_x = enemies[this.source].x;
-        //     this.source_y = enemies[this.source].y;
-        // } else if (this.source_type == "tower") {
-        //     this.source_x = towers[this.source].x;
-        //     this.source_y = towers[this.source].y;
-        // } else if (this.source_type == "air") {
-        //     this.source_x = 0;
-        //     this.source_y = 0;
-        // } else if (this.source_type == "random") {
-        //     this.source_x = getRandomInRange(-15,15);
-        //     this.source_y = getRandomInRange(-5,5);
-        // } else {
-        //     this.source_x = 0;
-        //     this.source_y = 0;
-        // }
 
         this.x = x;
         this.y = y;
@@ -79,8 +62,13 @@ class ongoing_attack {
         // this.source_y = this.y;
         // this.progress = 0;
 
-        this.x -= (this.speed/distance)*current_segment_x_range;
-        this.y -= (this.speed/distance)*current_segment_y_range;
+        if (!this.lock_target) {
+            this.delta_x = (this.speed/distance)*current_segment_x_range;
+            this.delta_y = (this.speed/distance)*current_segment_y_range;
+        }
+        
+        this.x -= this.delta_x;
+        this.y -= this.delta_y;
 
         // var ctx = global_canvas.getContext("2d");
         // ctx.strokeStyle = "red";
@@ -89,17 +77,20 @@ class ongoing_attack {
         // ctx.lineTo(Math.round(global_canvas.width / 2) + this.target_x*grid_size, Math.round(global_canvas.height / 2) + this.target_y*grid_size);
         // ctx.stroke();
 
-        
-        if (distance < 0.1) {
-            if (!this.lock_target) {
-                if (this.target_type == "enemy") {
-                    enemies[this.target].damage(3);
-                } else if (this.target_type == "tower") {
-                    towers[this.target].damage(3);
+        if (this.target_type == "enemy") {
+            for (e in enemies) {
+                if (Math.sqrt(((enemies[e].x - this.x)**2)+((enemies[e].y - this.y)**2)) < 1) {
+                    enemies[e].damage(1);
+                    this.should_be_destroyed = true;
                 }
             }
-            
-            this.should_be_destroyed = true;
+        } else if (this.target_type == "tower") {
+            for (e in game_objects) {
+                if (Math.sqrt(((game_objects[e].x - this.x)**2)+((game_objects[e].y - this.y)**2)) < 1) {
+                    game_objects[e].damage(1);
+                    this.should_be_destroyed = true;
+                }
+            }
         }
     }
 }

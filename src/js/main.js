@@ -4,9 +4,9 @@ var global_images = {};
 
 var game_state = "menu";
 
-var grid_size = 50;
+var grid_size = 32;
 
-var game_objects = [new tower(0, 0, 10.0)];
+var game_objects = [new tower(0, 0, 10.0, tower_oven)];
 
 function draw()
 {
@@ -47,8 +47,9 @@ function draw()
 function draw_game(canvas, ctx)
 {
     
-    back = get_image("background");
-    ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - back.height / 2);
+    back = get_image("Wintry_Forest");
+    ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - (window.innerHeight-110) / 2 -56,1920,window.innerHeight-110);
+    
 
     for (e in enemies)
     {
@@ -64,6 +65,8 @@ function draw_game(canvas, ctx)
     {
         draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, game_objects[t].range);
     }
+
+    
 }
 
 function grid_to_coord(grid_pos, canvas)
@@ -80,7 +83,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
 
     if (obj.img === "blank")
     {
-        console.log(obj);
+        //console.log(obj);
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -92,8 +95,23 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
     ctx.translate(pos.x, pos.y);
 
     ctx.rotate(angle);
+    if (obj.img_type == "png") {
+        ctx.drawImage(img, - img.width / 2, - img.height / 2);
+    } else if (obj.img_type == "spritesheet") {
+        ctx.translate(0, 105);
+        ctx.drawImage(img, 0, (obj.frame_number*16), 16, 16, - img.width / 2, - img.height / 2, 16, 16);
+        console.log((obj.frame_number*16))
+        obj.frame_timer += 1;
+        if (obj.frame_timer >= 10) {
+            obj.frame_timer = 0;
+            obj.frame_number += 1;
+        }
+        if (obj.frame_number >= 14) {
+            obj.frame_number = 0;
+        }
+    }
 
-    ctx.drawImage(img, - img.width / 2, - img.height / 2);
+    
 
     ctx.restore();
 
@@ -127,7 +145,6 @@ function tick_game()
         {
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
-                console.log(ongoing_attacks[index_2].target);
                 if (ongoing_attacks[index_2].target > index) {
                     ongoing_attacks[index_2].target -= 1;
                 }
@@ -198,7 +215,6 @@ function click_canvas(canvas, x, y)
     x /= grid_size;
     y /= grid_size;
 
-    console.log(x + ", " + y);
 
     for (i in game_objects)
     {
@@ -210,7 +226,7 @@ function click_canvas(canvas, x, y)
     }
 
     if (cold_hard_cash >= 100) {
-        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
+        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10, tower_campfire));
         cold_hard_cash -= 100;
     }
     

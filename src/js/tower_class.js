@@ -1,5 +1,5 @@
 class tower {
-    constructor (x, y, max_health)
+    constructor (x, y, max_health, type)
     {
         this.x = x;
         this.y = y;
@@ -7,13 +7,25 @@ class tower {
         this.max_health = max_health;
         this.health = max_health;
 
-        this.img = "oven";
+        this.img = type.img;
 
-        this.angle = 1;
+        this.angle = 0;
 
         this.timer = 60;
 
-        this.range = 7;
+        this.range = type.range;
+
+        this.attack = type.attack;
+
+        this.frame_number = 0;
+
+        this.frame_timer = 0;
+
+        this.img_type = type.img_type;
+    }
+
+    damage(amount) {
+        this.health -= amount;
     }
 
     tick()
@@ -27,53 +39,7 @@ class tower {
             game_objects.splice(i, 1);
         }
 
-        // Check for the nearest enemy
-        let best = null;
-        let best_dist = this.range * this.range;
-        let best_i = null;
-
-        for (i in enemies)
-        {
-            let e = enemies[i];
-
-            let dist = Math.pow(this.x - e.x, 2.0) + Math.pow(this.y - e.y, 2.0);
-
-            if (dist < best_dist)
-            {
-                best_i = i;
-                best = e;
-                best_dist = dist;
-            }
-        }
-
-        if (best != null)
-        {
-            // var ctx = global_canvas.getContext("2d");
-
-            let p0 = grid_to_coord(this, global_canvas);
-            let p1 = grid_to_coord(best, global_canvas);
-
-            if (this.timer <= 0)
-            {
-                let attack = new ongoing_attack(this.x, this.y, "enemy", best_i);
-
-                console.log(attack);
-            
-                ongoing_attacks.push(attack);
-
-                this.timer = 60;
-            }
-
-            this.timer -= 1;
-            
-
-            // ctx.beginPath();
-            // ctx.moveTo(p0.x, p0.y);
-            // ctx.lineTo(p1.x, p1.y);
-            // ctx.stroke();
-
-            this.angle = Math.atan2(p1.x - p0.x, p0.y - p1.y);
-        }
+        this.attack();
         
     }
 }
