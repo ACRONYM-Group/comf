@@ -12,7 +12,5 @@ html
 }
 
 #main_menu {
-    position: absolute;
-    left:0;
-    top:150;
+z-index: 1
 }
