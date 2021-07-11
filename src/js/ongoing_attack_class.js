@@ -1,5 +1,5 @@
 class ongoing_attack {
-    constructor(source_type, source, target_type, target) {
+    constructor(x, y, target_type, target) {
         this.source = source;
         this.source_type = source_type;
         this.target = target;
@@ -11,25 +11,25 @@ class ongoing_attack {
         this.target_random_id = enemies[this.target].random_id;
         this.img = "blank";
 
-        if (this.source_type == "enemy") {
-            this.source_x = enemies[this.source].x;
-            this.source_y = enemies[this.source].y;
-        } else if (this.source_type == "tower") {
-            this.source_x = towers[this.source].x;
-            this.source_y = towers[this.source].y;
-        } else if (this.source_type == "air") {
-            this.source_x = 0;
-            this.source_y = 0;
-        } else if (this.source_type == "random") {
-            this.source_x = getRandomInRange(-15,15);
-            this.source_y = getRandomInRange(-5,5);
-        } else {
-            this.source_x = 0;
-            this.source_y = 0;
-        }
+        // if (this.source_type == "enemy") {
+        //     this.source_x = enemies[this.source].x;
+        //     this.source_y = enemies[this.source].y;
+        // } else if (this.source_type == "tower") {
+        //     this.source_x = towers[this.source].x;
+        //     this.source_y = towers[this.source].y;
+        // } else if (this.source_type == "air") {
+        //     this.source_x = 0;
+        //     this.source_y = 0;
+        // } else if (this.source_type == "random") {
+        //     this.source_x = getRandomInRange(-15,15);
+        //     this.source_y = getRandomInRange(-5,5);
+        // } else {
+        //     this.source_x = 0;
+        //     this.source_y = 0;
+        // }
 
-        this.x = this.source_x;
-        this.y = this.source_y;
+        this.x = x;
+        this.y = y;
 
         this.find_target();
     }

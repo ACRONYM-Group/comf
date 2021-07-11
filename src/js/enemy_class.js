@@ -26,7 +26,7 @@ class enemy {
             this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range;
 
         } else {
-            //this.destroy();
+            this.destroy();
         }
         
     }
