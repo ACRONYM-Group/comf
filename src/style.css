@@ -54,6 +54,7 @@ z-index: 1;
 /* Navbar container */
 .navbar 
 {
+    
     overflow: hidden;
     background-color:  #111;
     font-family: Arial;
