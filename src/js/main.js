@@ -94,7 +94,7 @@ function get_image(img_name)
 
         if (img === null)
         {
-            alert("Unable to load image " + img_name)
+            alert("Unable to load image " + img_name);
         }
 
         global_images[img_name] = img;
@@ -110,17 +110,11 @@ function main_loop()
     if (game_state == "in_game")
     {
         tick_game();
+        spawn_enemy_tick();
     }
 }
 
-function create_enemies() {
-    enemies.push(new enemy(0, 0, .03))
-    enemies.push(new enemy(0, 1, .03))
-}
-
 setInterval(main_loop, (1000/60));
-
-setInterval(create_enemies, 2000);
 
 window.onload = function()
 {
