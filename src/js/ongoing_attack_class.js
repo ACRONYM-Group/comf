@@ -33,19 +33,22 @@ class ongoing_attack {
     }
 
     find_target() {
-        if (this.target_type == "enemy") {
-            this.target_x = enemies[this.target].x;
-            this.target_y = enemies[this.target].y;
-        } else if (this.target_type == "tower") {
-            this.target_x = towers[this.target].x;
-            this.target_y = towers[this.target].y;
-        } else if (this.target_type == "air") {
-            this.target_x = 0;
-            this.target_y = 0;
-        } else {
-            this.target_x = 0;
-            this.target_y = 0;
+        if (this.target < enemies.length) {
+            if (this.target_type == "enemy") {
+                this.target_x = enemies[this.target].x;
+                this.target_y = enemies[this.target].y;
+            } else if (this.target_type == "tower") {
+                this.target_x = towers[this.target].x;
+                this.target_y = towers[this.target].y;
+            } else if (this.target_type == "air") {
+                this.target_x = 0;
+                this.target_y = 0;
+            } else {
+                this.target_x = 0;
+                this.target_y = 0;
+            }
         }
+        
     }
 
     tick() {

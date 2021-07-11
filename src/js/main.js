@@ -125,7 +125,6 @@ function tick_game()
         enemies[index].move();
         if (enemies[index].should_be_destroyed)
         {
-            cold_hard_cash += 1;
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
                 console.log(ongoing_attacks[index_2].target);
@@ -210,9 +209,9 @@ function click_canvas(canvas, x, y)
         }
     }
 
-    if (cold_hard_cash >= 20) {
+    if (cold_hard_cash >= 100) {
         game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10));
-        cold_hard_cash -= 20;
+        cold_hard_cash -= 100;
     }
     
 }

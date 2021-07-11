@@ -7,6 +7,7 @@ class enemy {
         this.speed = speed;
         this.should_be_destroyed = false;
         this.img = img;
+        this.cost = 1;
         this.move();
     }
 
@@ -42,6 +43,7 @@ class enemy {
     tick() {
         if (this.health <= 0) {
             this.should_be_destroyed = true;
+            cold_hard_cash += this.cost;
         }
     }
 

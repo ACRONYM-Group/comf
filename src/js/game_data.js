@@ -16,4 +16,4 @@ paths = [
 enemies = [];
 ongoing_attacks = [];
 
-cold_hard_cash = 20;
+cold_hard_cash = 150;
