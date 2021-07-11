@@ -21,8 +21,8 @@ class enemy {
                 this.point_number += 1;
             }
 
-            this.x = paths[this.path_number][this.point_number].x + (this.point_progress/current_segment_length)*current_segment_x_range;
-            this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range;
+            this.x = paths[this.path_number][this.point_number].x + (this.point_progress/current_segment_length)*current_segment_x_range*grid_size;
+            this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range*grid_size;
         }
         
     }
