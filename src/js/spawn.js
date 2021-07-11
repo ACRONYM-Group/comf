@@ -1,8 +1,10 @@
-var spawn_state = {"power_modifier": 1.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0, 1]};
+var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0, 1]};
 
 function spawn_new_enemy()
 {
-    enemies.push(new enemy(0, spawn_state.paths[Math.trunc(spawn_state.paths.length * Math.random())], .03 * spawn_state.difficulty));
+    let v = ["snowflake", "snowflake_yellow"][Math.trunc((Math.random()) * spawn_state.power_modifier)];
+    console.log(v);
+    enemies.push(new enemy(0, spawn_state.paths[Math.trunc(spawn_state.paths.length * Math.random())], .03 * spawn_state.difficulty, v));
 }
 
 function spawn_enemy_tick()
