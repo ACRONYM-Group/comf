@@ -50,10 +50,10 @@ class ongoing_attack {
 
     tick() {
 
-        if (enemies.length == 0 || enemies[this.target].random_id != this.target_random_id) {
-            this.should_be_destroyed = true;
+        // if (enemies.length == 0 || enemies[this.target].random_id != this.target_random_id) {
+        //     this.should_be_destroyed = true;
 
-        }
+        // }
 
         this.last_target_x = this.target_x;
         this.last_target_y = this.target_y;

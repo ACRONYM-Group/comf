@@ -12,7 +12,7 @@ function draw()
 {
 
     cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
-    cold_hard_cash_display.innerText = cold_hard_cash;
+    cold_hard_cash_display.innerText = "$CHC " + cold_hard_cash;
 
     if (typeof global_canvas === "undefined")
     {
