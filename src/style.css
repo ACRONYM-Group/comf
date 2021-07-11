@@ -90,9 +90,8 @@ z-index: 1;
 
 #wave_2
 {
-    position:absolute;
+    text-align: center;
     font-size: 40px;
-    margin-left: 22px;
     margin-top: 25px;
 }
 
@@ -104,7 +103,6 @@ z-index: 1;
 
 #chc p
 {
-    float: left;
     color:rgb(0, 0, 0);
     margin-top: 16px;
     font-size: 221%;
@@ -134,9 +132,8 @@ z-index: 1;
 {
     color:rgb(54, 20, 20);
     font-size:200%;
-    position:absolute;
     margin-top:28px;
-    margin-left:21px;
+    text-align: center;
 }
 
 #next_wave
@@ -160,6 +157,7 @@ z-index: 1;
 {
     color:rgb(255, 255, 255);
 }
+
 /* top bar */
 /* Navbar container */
 #navbar
