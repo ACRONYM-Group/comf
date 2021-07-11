@@ -36,14 +36,15 @@ function spawn_enemy_tick()
         {
             spawn_state.waves_remaining -= 1;
         }
-
-        if (spawn_state.waves_remaining === 0)
-        {
-            document.getElementById("next_wave").onclick = next_wave;
-        }
     }
 
     spawn_state.wave_timer -= 1.0 / 60.0;
+
+    if (spawn_state.waves_remaining === 0 && enemies.length === 0)
+    {
+        document.getElementById("next_wave").onclick = next_wave;
+        document.getElementById("next_wave").classList.remove("button_disabled");
+    }
 }
 
 function next_wave()
@@ -51,6 +52,8 @@ function next_wave()
     if (spawn_state.waves_remaining === 0)
     {
         document.getElementById("next_wave").onclick = function() {};
+        document.getElementById("next_wave").classList.add("button_disabled");
+
         spawn_state.wave += 1;
         spawn_state.difficulty += 0.25;
         spawn_state.power_modifier += 0.5;
