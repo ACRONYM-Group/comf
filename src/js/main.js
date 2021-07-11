@@ -42,8 +42,8 @@ function draw()
 
 function draw_game(canvas, ctx)
 {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    back = get_image("background");
+    ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - back.height / 2);
 
     for (e in enemies)
     {
@@ -151,6 +151,8 @@ function click_canvas(canvas, x, y)
 
     x /= grid_size;
     y /= grid_size;
+
+    console.log(x + ", " + y);
 
     for (i in game_objects)
     {
