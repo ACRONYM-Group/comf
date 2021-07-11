@@ -80,6 +80,9 @@ function switch_to_game()
 function main_loop()
 {
     draw();
+    for (unit in enemies) {
+        unit.move();
+        alert(unit.x + " - " + unit.y);
 
     if (game_state == "in_game")
     {
