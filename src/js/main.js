@@ -6,7 +6,7 @@ var game_state = "menu";
 
 var grid_size = 32;
 
-var game_objects = [new tower(0, 0, 10.0, tower_oven)]; //new tower(0, 0, 10.0, tower_oven)
+var game_objects = [new tower(-1, 0, 10.0, tower_oven)]; //new tower(0, 0, 10.0, tower_oven)
 
 var is_speed = false;
 
