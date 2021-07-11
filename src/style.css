@@ -72,6 +72,50 @@ z-index: 1;
     width: 64px;
 }
 
+#wave_counter
+{
+    background-color:rgb(204, 204, 204);
+    height:64px;
+    width:64px;
+}
+
+#wave_1
+{
+    position:absolute;
+    font-size: 26px;
+    margin-left: 0px;
+    margin-top: 2px;
+}
+
+#wave_2
+{
+    position:absolute;
+    font-size: 40px;
+    margin-left: 22px;
+    margin-top: 25px;
+}
+
+#chc
+{
+    width:64px;
+    height:64px;
+}
+
+#chc p
+{
+
+    position: absolute;
+    color:rgb(0, 0, 0);
+    margin-left: 23px;
+    margin-top: 8px;
+    font-size: 221%;
+}
+
+#chc img
+{
+    float: absolute;
+}
+
 /* top bar */
 /* Navbar container */
 #navbar

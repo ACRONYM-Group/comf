@@ -12,6 +12,8 @@
         <script src="js/spawn.js"></script>
         <script src="js/point.js"></script>
         <script src="js/tower_class.js"></script>
+        <script src="js/unit_files/oven.js"></script>
+        <script src="js/unit_files/campfire.js"></script>
         <script src="js/ongoing_attack_class.js"></script>
         <script src="js/main.js"></script>
     </head>
@@ -48,20 +50,33 @@
             <img id="ui_bar_logo" src="img/ACRONYM.png" >
             <!-- left elements -->
             <button id="tower1" class="tower_selector">
-                tower1
+                <img src="img/oven.png" alt="img/blank.png">
             </button>
             <button id="tower2" class="tower_selector">
                 tower2
             </button>
 
             <!-- right elements -->
+            <div id="wave_counter" class="info_box">
+                <p id="wave_1">
+                    Wave
+                </p>
+                <p id="wave_2">
+                    0
+                </p>
+            </div>
+            <div id="chc" class="info_box">
+                <p>
+                    0
+                </p>
+                <img src="img/CHC.png">
+            </div>
             <button id="next_wave" class="wave_control" onclick="next_wave()">
                 next wave
             </button>
             <button id="fastwave" class="wave_control" onclick="is_speed = !is_speed">
                 >>
             </button>
-
         </div>
         
         <div style="display:none;">
@@ -69,7 +84,9 @@
             <img id="snowflake_img" src="img/snowflake.png">
             <img id="snowflake_yellow_img" src="img/snowflake_yellow.png">
             <img id="oven_img" src="img/oven.png">
+            <img id="campfire_img" src="img/campfire.png">
             <img id="background_img" src="img/background.png">
+            <img id="Wintry_Forest_img" src="img/Wintry_Forest.png">
             <img id="cookie_img" src="img/cookie.png">
           </div>
     </body>
