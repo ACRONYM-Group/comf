@@ -7,7 +7,9 @@ class tower {
         this.max_health = max_health;
         this.health = max_health;
 
-        this.img = "blank";
+        this.img = "oven";
+
+        this.angle = 1;
     }
 
     tick()
@@ -49,6 +51,8 @@ class tower {
             ctx.moveTo(p0.x, p0.y);
             ctx.lineTo(p1.x, p1.y);
             ctx.stroke();
+
+            this.angle = Math.atan2(p1.x - p0.x, p0.y - p1.y);
         }
         
     }

@@ -1,7 +1,5 @@
 class enemy {
     constructor (health, path_number, speed, img) {
-        this.x = 0;
-        this.y = 0;
         this.health = health;
         this.path_number = path_number;
         this.point_number = 0;
@@ -9,6 +7,7 @@ class enemy {
         this.speed = speed;
         this.should_be_destroyed = false;
         this.img = img;
+        this.move();
     }
 
     move () {

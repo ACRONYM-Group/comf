@@ -9,6 +9,7 @@ class ongoing_attack {
         this.lock_target = false;
         this.speed = 0.15;
         this.target_random_id = enemies[this.target].random_id;
+        this.img = "blank";
 
         if (this.source_type == "enemy") {
             this.source_x = enemies[this.source].x;

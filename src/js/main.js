@@ -42,8 +42,8 @@ function draw()
 
 function draw_game(canvas, ctx)
 {
-    ctx.fillStyle = "blue";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    back = get_image("background");
+    ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - back.height / 2);
 
     for (e in enemies)
     {
@@ -56,7 +56,7 @@ function draw_game(canvas, ctx)
     }
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health);
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
     }
 }
 
@@ -65,23 +65,36 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar)
+function draw_game_object(obj, canvas, ctx, health_bar, angle)
 {
+    if (typeof angle === "undefined")
+    {
+        angle = 0;
+    }
+
     pos = grid_to_coord(obj, canvas);
 
     img = get_image(obj.img);
 
-    ctx.drawImage(img, pos.x - img.width / 2, pos.y - img.height / 2);
+    ctx.save();
+
+    ctx.translate(pos.x, pos.y);
+
+    ctx.rotate(angle);
+
+    ctx.drawImage(img, - img.width / 2, - img.height / 2);
+
+    ctx.restore();
 
     if (typeof health_bar !== "undefined")
     {
         ctx.fillStyle = "grey";
 
-        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8, grid_size * 0.15);
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8, grid_size * 0.15);
 
         ctx.fillStyle = "green";
 
-        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.3, grid_size * 0.8 * health_bar, grid_size * 0.15);
+        ctx.fillRect(pos.x - grid_size * 0.4, pos.y + grid_size * 0.4, grid_size * 0.8 * health_bar, grid_size * 0.15);
     }
 }
 
@@ -154,24 +167,9 @@ function main_loop()
     }
 }
 
-function create_enemies() {
-    enemies.push(new enemy(3, 0, .06))
-    enemies.push(new enemy(3, 1, .06))
-}
-
-function create_projectiles() {
-
-    for (var i = 0; i < 1; i++) {
-        if (enemies.length != 0) {
-            var target_id = getRandomInRange(0, enemies.length-1);
-            ongoing_attacks.push(new ongoing_attack("air", 0, "enemy", target_id));
-        }
-    }
-    
-}
-
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function click_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
@@ -179,6 +177,8 @@ function click_canvas(canvas, x, y)
 
     x /= grid_size;
     y /= grid_size;
+
+    console.log(x + ", " + y);
 
     for (i in game_objects)
     {
@@ -193,10 +193,6 @@ function click_canvas(canvas, x, y)
 }
 
 setInterval(main_loop, (1000/60));
-
-setInterval(create_enemies, 500);
-
-setInterval(create_projectiles, 100);
 
 window.onload = function()
 {
