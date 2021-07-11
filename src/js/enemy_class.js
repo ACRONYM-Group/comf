@@ -11,9 +11,10 @@ class enemy {
 
     move () {
         if (this.point_number < paths[this.path_number].length-1) {
+            console.log("Test");
             var current_segment_length = this.find_path_length(this.path_number, this.point_number);
             var current_segment_x_range = paths[this.path_number][this.point_number+1].x - paths[this.path_number][this.point_number].x;
-            var current_segment_y_range = paths[this.path_number][this.point_number+1].x - paths[this.path_number][this.point_number].x;
+            var current_segment_y_range = paths[this.path_number][this.point_number+1].y - paths[this.path_number][this.point_number].y;
             this.point_progress += this.speed;
             
             if (this.point_progress >= current_segment_length) {
@@ -21,8 +22,8 @@ class enemy {
                 this.point_number += 1;
             }
 
-            this.x = (this.point_progress/current_segment_length)*current_segment_x_range;
-            this.y = (this.point_progress/current_segment_length)*current_segment_y_range;
+            this.x = paths[this.path_number][this.point_number].x + (this.point_progress/current_segment_length)*current_segment_x_range;
+            this.y = paths[this.path_number][this.point_number].y + (this.point_progress/current_segment_length)*current_segment_y_range;
         }
         
     }
@@ -30,9 +31,9 @@ class enemy {
     find_path_length (path_number, point_number) {
         var distance = 0;
         if (point_number < paths[path_number].length-1) {
-            first_point = paths[path_number][point_number];
-            second_point = paths[path_number][point_number+1];
-            distance = Math.sqrt(((first_point.x + second_point.x)**2)+((first_point.y + second_point.y)**2));
+            var first_point = paths[path_number][point_number];
+            var second_point = paths[path_number][point_number+1];
+            var distance = Math.sqrt(((first_point.x + second_point.x)**2)+((first_point.y + second_point.y)**2));
         }
         return distance;
     }
