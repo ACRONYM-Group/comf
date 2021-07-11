@@ -20,10 +20,7 @@ paths = [
         {"x":-15, "y":-5}
 <<<<<<< HEAD
     ]*/
-]
-=======
-    ]
 ];
->>>>>>> 8db0f7aa93b0a2eafdf0a74094024a90cb1821b0
 
 enemies = [];
+ongoing_attacks = [];

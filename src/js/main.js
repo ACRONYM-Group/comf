@@ -167,24 +167,9 @@ function main_loop()
     }
 }
 
-function create_enemies() {
-    enemies.push(new enemy(3, 0, .06))
-    enemies.push(new enemy(3, 1, .06))
-}
-
-function create_projectiles() {
-
-    for (var i = 0; i < 1; i++) {
-        if (enemies.length != 0) {
-            var target_id = getRandomInRange(0, enemies.length-1);
-            ongoing_attacks.push(new ongoing_attack("air", 0, "enemy", target_id));
-        }
-    }
-    
-}
-
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 function click_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
@@ -208,10 +193,6 @@ function click_canvas(canvas, x, y)
 }
 
 setInterval(main_loop, (1000/60));
-
-setInterval(create_enemies, 500);
-
-setInterval(create_projectiles, 100);
 
 window.onload = function()
 {
