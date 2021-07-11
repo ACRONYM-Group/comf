@@ -12,7 +12,43 @@ html
 }
 
 #main_menu {
-z-index: 1
+z-index: 1;
+}
+
+#ui_bar 
+{
+    position: fixed;
+    bottom: 0;
+    height: 64px;
+    width: 100%;
+    background-color: rgb(117, 70, 56);
+}
+
+#ui_bar_logo
+{
+    float: left;
+    background-color:black
+}
+
+.tower_selector
+{
+    float: left;
+    height: 100%;
+    width: 64px;
+}
+
+.wave_control
+{
+    float: right;
+    height: 100%;
+    width: 64px;
+}
+
+.info_box
+{
+    float: right;
+    height: 100%;
+    width: 64px;
 }
 
 /* Navbar container */

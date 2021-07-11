@@ -50,6 +50,10 @@ function draw_game(canvas, ctx)
         draw_game_object(enemies[e], canvas, ctx);
     }
 
+    for (e in ongoing_attacks)
+    {
+        draw_game_object(ongoing_attacks[e], canvas, ctx);
+    }
     for (t in game_objects)
     {
         draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
@@ -96,12 +100,31 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle)
 
 function tick_game()
 {
-    for (index in enemies)
-    {
+    for (index in enemies) {
+        enemies[index].tick();
         enemies[index].move();
         if (enemies[index].should_be_destroyed)
         {
             enemies.splice(index, 1);
+            for (index_2 in ongoing_attacks) {
+                console.log(ongoing_attacks[index_2].target);
+                if (ongoing_attacks[index_2].target > index) {
+                    ongoing_attacks[index_2].target -= 1;
+                }
+                if (ongoing_attacks[index_2].target == index) {
+                    ongoing_attacks[index_2].lock_target = true;
+                    // ongoing_attacks[index_2].target.should_be_destroyed = true;
+                    // ongoing_attacks.splice(index_2, 1);
+                }
+            }
+        }
+
+    }
+
+    for (index in ongoing_attacks) {
+        ongoing_attacks[index].tick();
+        if (ongoing_attacks[index].should_be_destroyed) {
+            ongoing_attacks.splice(index, 1);
         }
     }
 
@@ -144,6 +167,24 @@ function main_loop()
     }
 }
 
+function create_enemies() {
+    enemies.push(new enemy(3, 0, .06))
+    enemies.push(new enemy(3, 1, .06))
+}
+
+function create_projectiles() {
+
+    for (var i = 0; i < 1; i++) {
+        if (enemies.length != 0) {
+            var target_id = getRandomInRange(0, enemies.length-1);
+            ongoing_attacks.push(new ongoing_attack("air", 0, "enemy", target_id));
+        }
+    }
+    
+}
+
+function getRandomInRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 function click_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
@@ -167,6 +208,10 @@ function click_canvas(canvas, x, y)
 }
 
 setInterval(main_loop, (1000/60));
+
+setInterval(create_enemies, 500);
+
+setInterval(create_projectiles, 100);
 
 window.onload = function()
 {
