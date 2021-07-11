@@ -11,7 +11,6 @@ class enemy {
 
     move () {
         if (this.point_number < paths[this.path_number].length-1) {
-            console.log("Test");
             var current_segment_length = this.find_path_length(this.path_number, this.point_number);
             var current_segment_x_range = paths[this.path_number][this.point_number+1].x - paths[this.path_number][this.point_number].x;
             var current_segment_y_range = paths[this.path_number][this.point_number+1].y - paths[this.path_number][this.point_number].y;
