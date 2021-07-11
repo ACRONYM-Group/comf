@@ -52,7 +52,7 @@ function draw_game(canvas, ctx)
 
     for (e in enemies)
     {
-        draw_game_object(enemies[e], canvas, ctx);
+        draw_game_object(enemies[e], canvas, ctx, undefined, undefined, undefined, enemies[e].scale());
     }
 
     for (e in ongoing_attacks)
@@ -71,16 +71,16 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
+function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
 {
     if (typeof angle === "undefined")
     {
         angle = 0;
     }
 
-    if (obj.img === "blank")
+    if (typeof scale === "undefined")
     {
-        console.log(obj);
+        scale = 1;
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -93,7 +93,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range)
 
     ctx.rotate(angle);
 
-    ctx.drawImage(img, - img.width / 2, - img.height / 2);
+    ctx.drawImage(img, - img.width * scale / 2, - img.height * scale / 2, img.width * scale, img.height * scale);
 
     ctx.restore();
 
@@ -127,7 +127,6 @@ function tick_game()
         {
             enemies.splice(index, 1);
             for (index_2 in ongoing_attacks) {
-                console.log(ongoing_attacks[index_2].target);
                 if (ongoing_attacks[index_2].target > index) {
                     ongoing_attacks[index_2].target -= 1;
                 }
@@ -197,8 +196,6 @@ function click_canvas(canvas, x, y)
 
     x /= grid_size;
     y /= grid_size;
-
-    console.log(x + ", " + y);
 
     for (i in game_objects)
     {

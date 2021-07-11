@@ -5,7 +5,7 @@ class ongoing_attack {
         this.progress = 0;
         this.should_be_destroyed = false;
         this.lock_target = false;
-        this.speed = 0.15;
+        this.speed = 0.35;
         this.target_random_id = enemies[this.target].random_id;
         this.img = "cookie";
 
@@ -90,12 +90,12 @@ class ongoing_attack {
         // ctx.stroke();
 
         
-        if (distance < 0.1) {
+        if (distance < 0.35) {
             if (!this.lock_target) {
                 if (this.target_type == "enemy") {
-                    enemies[this.target].damage(3);
+                    enemies[this.target].damage(1);
                 } else if (this.target_type == "tower") {
-                    towers[this.target].damage(3);
+                    towers[this.target].damage(1);
                 }
             }
             
