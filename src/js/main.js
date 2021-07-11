@@ -282,6 +282,20 @@ function mouse_canvas(canvas, x, y)
     
 }
 
+function key_press(e)
+{
+    if (e.keyCode === 27)
+    {
+        tower_to_place = undefined;
+    }
+}
+
+function right_click(e)
+{
+    tower_to_place = undefined;
+
+    e.disableDefault();
+}
 
 setInterval(main_loop, (1000/60));
 
@@ -289,6 +303,11 @@ window.onload = function()
 {
     document.getElementById("tower1").onclick = function() { tower_to_place = tower_oven; };
     document.getElementById("tower2").onclick = function() { tower_to_place = tower_campfire; };
+
+    document.getElementById("main_canvas").addEventListener('contextmenu', function (e) { 
+        tower_to_place = undefined;
+        e.preventDefault(); 
+      }, false);
 
     document.getElementById("main_menu").onclick = function()
     {
@@ -328,3 +347,5 @@ window.onload = function()
 window.onbeforeunload = function () {
     window.scrollTo(0, 0);
   }
+
+  window.addEventListener('keydown',key_press,false);
