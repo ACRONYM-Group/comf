@@ -9,3 +9,8 @@ paths = [
 enemies = [
     new enemy(10, 0, 0.1)
 ]
+
+
+ongoing_attacks = [
+    
+]
