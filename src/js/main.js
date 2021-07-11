@@ -12,7 +12,7 @@ function draw()
 
     if (typeof global_image === "undefined")
     {
-        global_image = document.getElementById("image")
+        global_image = document.getElementById("main_menu")
     }
 
     if (game_state === "menu")
@@ -21,12 +21,31 @@ function draw()
     }
     else
     {
-        global_image.style.display = "hidden";
+        global_image.style.display = "none";
     }
 
-    var ctx = global_canvas.getContext("2d");
+    if (game_state === "in_game")
+    {
+        var ctx = global_canvas.getContext("2d");
+        
+        draw_game(global_canvas, ctx);
+    }
+}
+
+function draw_game(canvas, ctx)
+{
     ctx.fillStyle = "blue";
-    ctx.fillRect(0, 0, global_canvas.width, global_canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function tick_game()
+{
+
+}
+
+function switch_to_game()
+{
+    game_state = "in_game";
 }
 
 function main_loop()
@@ -35,7 +54,19 @@ function main_loop()
     for (unit in enemies) {
         unit.move();
         alert(unit.x + " - " + unit.y);
+
+    if (game_state == "in_game")
+    {
+        tick_game();
     }
 }
 
 setInterval(main_loop, (1000/60));
+
+window.onload = function()
+{
+    document.getElementById("main_menu").onclick = function()
+    {
+        switch_to_game();
+    }
+}
