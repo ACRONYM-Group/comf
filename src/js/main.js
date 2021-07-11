@@ -6,7 +6,7 @@ var game_state = "menu";
 
 var grid_size = 32;
 
-var game_objects = [new tower(0, 0, 10.0, tower_oven)];
+var game_objects = []; //new tower(0, 0, 10.0, tower_oven)
 
 var is_speed = false;
 
@@ -46,11 +46,17 @@ function draw()
     }
 }
 
+var background_height = 0;
+var background_width = 0;
+
 function draw_game(canvas, ctx)
 {
     
     back = get_image("Wintry_Forest");
-    ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - (window.innerHeight-110) / 2 -56,1920,window.innerHeight-110);
+    console.log(canvas.width);
+    ctx.drawImage(back, 0, 0,canvas.width,canvas.height-116);
+    background_width = canvas.width;
+    background_height = canvas.height-116;
     
 
     for (e in enemies)
@@ -73,7 +79,9 @@ function draw_game(canvas, ctx)
 
 function grid_to_coord(grid_pos, canvas)
 {
-    return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
+    x_ratio = background_width/1920;
+    y_ratio = background_height/821;
+    return {"x": Math.round(canvas.width / 2) + grid_pos.x * (grid_size*(x_ratio)), "y": Math.round((canvas.height-116) / 2) + grid_pos.y * (grid_size*y_ratio)}
 }
 
 function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
@@ -86,7 +94,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
     if (typeof scale === "undefined")
     {
         //console.log(obj);
-        scale = 1;
+        //scale = 1;
     }
 
     pos = grid_to_coord(obj, canvas);
@@ -95,15 +103,27 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
 
     ctx.save();
 
+    x_ratio = background_width/1920;
+    y_ratio = background_height/1080;
+
+    console.log(pos.x + " - " + pos.y);
+
     ctx.translate(pos.x, pos.y);
 
     ctx.rotate(angle);
     if (obj.img_type == "png") {
         ctx.drawImage(img, - img.width / 2, - img.height / 2);
+        var ctx = global_canvas.getContext("2d");
+        ctx.strokeStyle = "red";
+        ctx.beginPath();
+        ctx.moveTo(- img.width / 2,  - img.height / 2);
+        ctx.lineTo(- img.width / 2+50,  - img.height / 2);
+        ctx.moveTo(- img.width / 2,  - img.height / 2);
+        ctx.lineTo(- img.width / 2,  - img.height / 2+50);
+        ctx.stroke();
     } else if (obj.img_type == "spritesheet") {
-        ctx.translate(0, 105);
+        //ctx.translate(0, 105);
         ctx.drawImage(img, 0, (obj.frame_number*16), 16, 16, - img.width / 2, - img.height / 2, 16, 16);
-        console.log((obj.frame_number*16))
         obj.frame_timer += 1;
         if (obj.frame_timer >= 10) {
             obj.frame_timer = 0;
