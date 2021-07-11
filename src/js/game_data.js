@@ -80,3 +80,5 @@ enemies = [];
 ongoing_attacks = [];
 
 cold_hard_cash = 150;
+
+comfort_value = 100;

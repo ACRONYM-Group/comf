@@ -60,6 +60,8 @@ function draw_game(canvas, ctx)
     document.getElementById("chc_counter_value").innerHTML = cold_hard_cash;
     document.getElementById("wave_2").innerHTML = spawn_state.wave;
 
+    document.getElementById("health_value").innerHTML = comfort_value;
+
     back = get_image("Lizs_forest_post-logging");
     console.log(canvas.width);
     ctx.drawImage(back, 0, 0,canvas.width,canvas.height-116);
@@ -232,6 +234,14 @@ function get_image(img_name)
     return global_images[img_name];
 }
 
+function deal_damage_to_player(amount) {
+    comfort_value -= amount;
+    if (comfort_value <= 0) {
+        alert("GAME OVER");
+        location.reload();
+    }
+}
+
 function main_loop()
 {
     draw();
@@ -290,9 +300,9 @@ function click_canvas(canvas, x, y)
             }
         }
 
-        if (cold_hard_cash >= 100) {
+        if (cold_hard_cash >= tower_to_place.cost) {
             game_objects.push(new tower(Math.round(x), Math.round(y), 10, tower_to_place));
-            cold_hard_cash -= 100;
+            cold_hard_cash -= tower_to_place.cost;
         }
     }
     else

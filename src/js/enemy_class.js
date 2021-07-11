@@ -1,15 +1,15 @@
 class enemy {
-    constructor (health, path_number, speed, img, cost) {
-        this.health = health;
+    constructor (path_number, type) {
+        this.health = type.health;
         this.path_number = path_number;
         this.point_number = 0;
         this.point_progress = 0;
-        this.speed = speed;
+        this.speed = type.speed;
         this.should_be_destroyed = false;
-        this.img = img;
-        this.cost = cost;
-        this.max_health = health;
-        this.img_type = "png";
+        this.img = type.img;
+        this.cost = type.cost;
+        this.max_health = type.health;
+        this.img_type = type.img_type;
         this.move();
     }
 
@@ -30,6 +30,7 @@ class enemy {
 
         } else {
             this.destroy();
+            deal_damage_to_player(this.health);
         }
         
     }

@@ -20,5 +20,6 @@ var tower_campfire = {
     },
     "img":"campfire",
     "img_type":"spritesheet",
-    "range":3
+    "range":3,
+    "cost":50
 }
