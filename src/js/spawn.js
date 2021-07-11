@@ -1,4 +1,4 @@
-var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 40.0, "variance": 0.1, "paths": [0], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
+var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficulty": 0.75, "remaining": 0.0, "rate": 50.0, "variance": 0.1, "paths": [0], "wave_timer": 5.0, "in_wave": false, "wave_length": 5.0, "wave": 1, "waves_remaining": 0};
 
 var enemy_types = [
     {"name": "Snowflake", "description": "Just your run-of-the-mill snowflakes", "img": "snowflake", "speed": 1.0, "cost": 1.0, "health": 1.0},
@@ -25,15 +25,45 @@ function spawn_enemy_tick()
         }
 
         spawn_state.remaining -= 1.0;
-        spawn_state.difficulty += 1.0 / 60.0 / 60.0;
     }
-    
-    if (spawn_state.wave_timer <= 0)
+
+    if (spawn_state.wave_timer <= 0 && spawn_state.waves_remaining > 0)
     {
         spawn_state.in_wave = !spawn_state.in_wave;
-
         spawn_state.wave_timer = spawn_state.wave_length;
+
+        if (!spawn_state.in_wave)
+        {
+            spawn_state.waves_remaining -= 1;
+        }
     }
 
     spawn_state.wave_timer -= 1.0 / 60.0;
+
+    if (spawn_state.waves_remaining === 0 && enemies.length === 0)
+    {
+        document.getElementById("next_wave").onclick = next_wave;
+        document.getElementById("next_wave").classList.remove("button_disabled");
+
+        is_speed = false;
+    }
+}
+
+function next_wave()
+{
+    if (spawn_state.waves_remaining === 0)
+    {
+        document.getElementById("next_wave").onclick = function() {};
+        document.getElementById("next_wave").classList.add("button_disabled");
+
+        spawn_state.wave += 1;
+        spawn_state.difficulty += 0.25;
+        spawn_state.power_modifier += 0.5;
+        spawn_state.in_wave = true;
+
+        spawn_state.wave_length = 5.0 + spawn_state.wave;
+        spawn_state.wave_timer = spawn_state.wave_length + 2.0;
+
+        spawn_state.waves_remaining = 1 + Math.round(0.45 * spawn_state.wave);
+    }
 }

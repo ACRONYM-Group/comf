@@ -53,7 +53,17 @@ z-index: 1;
     float: right;
     height: 100%;
     width: 64px;
+
+    border: none;
+    background-color: black;
+    border-radius: 5px;
 }
+
+.button_disabled
+{
+    background-color: grey;
+}
+
 
 .info_box
 {
@@ -237,4 +247,18 @@ z-index: 1;
     margin-left:20px; 
     background-color:black; 
     width:65px;
+}
+
+.bottom-button
+{
+    border: none;
+    background-color: black;
+    border-radius: 5px;
+}
+
+.bottom-button-disable
+{
+    border: none;
+    background-color: grey;
+    border-radius: 5px;
 }
