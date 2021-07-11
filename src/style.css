@@ -116,8 +116,32 @@ z-index: 1;
     float: left;
 }
 
+#health
+{
+    width:92px;
+    margin:0px;
+}
+
+#health_title
+{
+    font-size:160%;
+    position:absolute;
+    margin-top:6px;
+    margin-left:0px;
+}
+
+#health_value
+{
+    color:rgb(54, 20, 20);
+    font-size:200%;
+    position:absolute;
+    margin-top:28px;
+    margin-left:21px;
+}
+
 #next_wave
 {
+    font-size:150%;
     color:rgb(173, 173, 173);
 }
 
@@ -128,6 +152,7 @@ z-index: 1;
 
 #fastwave
 {
+    font-size:250%;
     color:rgb(173, 173, 173);
 }
 
@@ -257,7 +282,7 @@ z-index: 1;
 .loginButton
 {
     margin-left:20px; 
-    background-color:#919191; 
+    background-color:#585858; 
     width:65px;
 }
 
