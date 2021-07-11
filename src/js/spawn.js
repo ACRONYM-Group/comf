@@ -1,9 +1,8 @@
-var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
+var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 40.0, "variance": 0.1, "paths": [0], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
 
 function spawn_new_enemy()
 {
     let v = ["snowflake", "snowflake_yellow"][Math.trunc((Math.random()) * spawn_state.power_modifier)];
-    console.log(v);
     enemies.push(new enemy(3, spawn_state.paths[Math.trunc(spawn_state.paths.length * Math.random())], .03 * spawn_state.difficulty, v));
 }
 
