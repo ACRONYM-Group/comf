@@ -1,4 +1,4 @@
-var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficulty": 0.75, "remaining": 0.0, "rate": 50.0, "variance": 0.1, "paths": [0], "wave_timer": 5.0, "in_wave": false, "wave_length": 5.0, "wave": 1, "waves_remaining": 0};
+var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficulty": 0.75, "remaining": 0.0, "rate": 50.0, "variance": 0.1, "paths": [0], "wave_timer": 5.0, "in_wave": false, "wave_length": 5.0, "wave": 0, "waves_remaining": 0};
 
 var enemy_types = [
     {"name": "Snowflake", "description": "Just your run-of-the-mill snowflakes", "img": "snowflake", "speed": 1.0, "cost": 1.0, "health": 1.0},

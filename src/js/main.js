@@ -52,7 +52,9 @@ function draw()
 
 function draw_game(canvas, ctx)
 {
-    
+    document.getElementById("chc_counter_value").innerHTML = cold_hard_cash;
+    document.getElementById("wave_2").innerHTML = spawn_state.wave;
+
     back = get_image("Wintry_Forest");
     ctx.drawImage(back, canvas.width / 2 - back.width / 2, canvas.height / 2 - (window.innerHeight-110) / 2 -56,1920,window.innerHeight-110);
     
