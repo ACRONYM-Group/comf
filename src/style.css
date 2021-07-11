@@ -46,6 +46,7 @@ z-index: 1;
     float: left;
     height: 100%;
     width: 64px;
+    text-align: center;
 }
 
 .wave_control
@@ -97,25 +98,43 @@ z-index: 1;
 
 #chc
 {
-    width:64px;
+    width:128px;
     height:64px;
 }
 
 #chc p
 {
-
-    position: absolute;
+    float: left;
     color:rgb(0, 0, 0);
-    margin-left: 23px;
-    margin-top: 8px;
+    margin-top: 16px;
     font-size: 221%;
+    text-align: center;
 }
 
 #chc img
 {
-    float: absolute;
+    float: left;
 }
 
+#next_wave
+{
+    color:rgb(173, 173, 173);
+}
+
+#next_wave:hover
+{
+    color:rgb(255, 255, 255);
+}
+
+#fastwave
+{
+    color:rgb(173, 173, 173);
+}
+
+#fastwave:hover
+{
+    color:rgb(255, 255, 255);
+}
 /* top bar */
 /* Navbar container */
 #navbar

@@ -62,6 +62,6 @@ class enemy {
 
     scale()
     {
-        return Math.max(0.1, Math.max(0, this.health) / this.max_health);
+        return 0.5 + 0.5 * Math.max(0, this.health) / this.max_health;
     }
 }

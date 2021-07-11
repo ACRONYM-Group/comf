@@ -1,4 +1,4 @@
-var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficulty": 0.75, "remaining": 0.0, "rate": 50.0, "variance": 0.1, "paths": [0], "wave_timer": 5.0, "in_wave": false, "wave_length": 5.0, "wave": 1, "waves_remaining": 0};
+var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficulty": 0.75, "remaining": 0.0, "rate": 50.0, "variance": 0.1, "paths": [0], "wave_timer": 5.0, "in_wave": false, "wave_length": 5.0, "wave": 0, "waves_remaining": 0};
 
 var enemy_types = [
     {"name": "Snowflake", "description": "Just your run-of-the-mill snowflakes", "img": "snowflake", "speed": 1.0, "cost": 1.0, "health": 1.0},
@@ -36,6 +36,7 @@ function spawn_enemy_tick()
 
         if (!spawn_state.in_wave)
         {
+            spawn_state.wave_timer /= spawn_state.difficulty;
             spawn_state.waves_remaining -= 1;
         }
     }
@@ -46,8 +47,6 @@ function spawn_enemy_tick()
     {
         document.getElementById("next_wave").onclick = next_wave;
         document.getElementById("next_wave").classList.remove("button_disabled");
-
-        is_speed = false;
     }
 }
 
@@ -59,8 +58,8 @@ function next_wave()
         document.getElementById("next_wave").classList.add("button_disabled");
 
         spawn_state.wave += 1;
-        spawn_state.difficulty += 0.25;
-        spawn_state.power_modifier += 0.5;
+        spawn_state.difficulty = 1.0 + (spawn_state.wave - 1) * 0.2;
+        spawn_state.power_modifier = 1.0 + 0.25 * (spawn_state.wave - 1);
         spawn_state.in_wave = true;
 
         spawn_state.wave_length = 5.0 + spawn_state.wave;
