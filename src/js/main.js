@@ -10,6 +10,10 @@ var game_objects = [new tower(0, 0, 10.0, tower_oven)];
 
 var is_speed = false;
 
+var tower_to_place = undefined;
+
+var cursor_pos = {"x": 3, "y": 3};
+
 function draw()
 {
 
@@ -65,10 +69,14 @@ function draw_game(canvas, ctx)
 
     for (t in game_objects)
     {
-        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, game_objects[t].range);
+        draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle);
     }
 
-    
+    if (typeof tower_to_place !== "undefined")
+    {
+        let obj = new tower(cursor_pos.x, cursor_pos.y, 1, tower_to_place);
+        draw_game_object(obj, canvas, ctx, undefined, undefined, obj.range, 1, 0.5);
+    }
 }
 
 function grid_to_coord(grid_pos, canvas)
@@ -76,7 +84,7 @@ function grid_to_coord(grid_pos, canvas)
     return {"x": Math.round(canvas.width / 2) + grid_pos.x * grid_size, "y": Math.round(canvas.height / 2) + grid_pos.y * grid_size}
 }
 
-function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
+function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alpha)
 {
     if (typeof angle === "undefined")
     {
@@ -89,6 +97,11 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
         scale = 1;
     }
 
+    if (typeof alpha === "undefined")
+    {
+        alpha = 1;
+    }
+
     pos = grid_to_coord(obj, canvas);
 
     img = get_image(obj.img);
@@ -96,6 +109,8 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale)
     ctx.save();
 
     ctx.translate(pos.x, pos.y);
+
+    ctx.globalAlpha = alpha;
 
     ctx.rotate(angle);
     if (obj.img_type == "png") {
@@ -226,7 +241,35 @@ function main_loop()
 function getRandomInRange(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
 function click_canvas(canvas, x, y)
+{
+    if (typeof tower_to_place !== "undefined")
+    {
+        x -= canvas.width / 2;
+        y -= canvas.height / 2;
+
+        x /= grid_size;
+        y /= grid_size;
+
+
+        for (i in game_objects)
+        {
+            g = game_objects[i];
+            if (g.x == Math.round(x) && g.y == Math.round(y))
+            {
+                return;
+            }
+        }
+
+        if (cold_hard_cash >= 100) {
+            game_objects.push(new tower(Math.round(x), Math.round(y), 10, tower_to_place));
+            cold_hard_cash -= 100;
+        }
+    }
+}
+
+function mouse_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
     y -= canvas.height / 2;
@@ -235,26 +278,18 @@ function click_canvas(canvas, x, y)
     y /= grid_size;
 
 
-    for (i in game_objects)
-    {
-        g = game_objects[i];
-        if (g.x == Math.trunc(x) && g.y == Math.trunc(y))
-        {
-            return;
-        }
-    }
-
-    if (cold_hard_cash >= 100) {
-        game_objects.push(new tower(Math.trunc(x), Math.trunc(y), 10, tower_campfire));
-        cold_hard_cash -= 100;
-    }
+    cursor_pos = {"x": Math.round(x), "y": Math.round(y)};
     
 }
+
 
 setInterval(main_loop, (1000/60));
 
 window.onload = function()
 {
+    document.getElementById("tower1").onclick = function() { tower_to_place = tower_oven; };
+    document.getElementById("tower2").onclick = function() { tower_to_place = tower_campfire; };
+
     document.getElementById("main_menu").onclick = function()
     {
         switch_to_game();
@@ -270,6 +305,20 @@ window.onload = function()
         var bbox = canvas.getBoundingClientRect();
         
         click_canvas(canvas,  x - bbox.left * (canvas.width  / bbox.width),
+                    y - bbox.top  * (canvas.height / bbox.height)
+        );
+    }
+
+    document.getElementById("main_canvas").onmousemove = function(e)
+    {
+        canvas = document.getElementById("main_canvas");
+
+        x = e.x;
+        y = e.y;
+
+        var bbox = canvas.getBoundingClientRect();
+        
+        mouse_canvas(canvas,  x - bbox.left * (canvas.width  / bbox.width),
                     y - bbox.top  * (canvas.height / bbox.height)
         );
     }
