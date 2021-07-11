@@ -1,4 +1,4 @@
-var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0, 1]};
+var spawn_state = {"power_modifier": 2.0, "distribution_factor": 1.0, "difficulty": 1.0, "remaining": 0.0, "rate": 120.0, "variance": 0.1, "paths": [0, 1], "wave_timer": 10.0, "in_wave": true, "wave_length": 10.0};
 
 function spawn_new_enemy()
 {
@@ -9,14 +9,26 @@ function spawn_new_enemy()
 
 function spawn_enemy_tick()
 {
-    if (spawn_state.remaining <= 0.0)
+    if (spawn_state.in_wave)
     {
-        spawn_new_enemy();
+        if (spawn_state.remaining <= 0.0)
+        {
+            spawn_new_enemy();
 
-        spawn_state.remaining = spawn_state.rate * (1.0 + (Math.random() - 0.5) * spawn_state.variance);
-        spawn_state.remaining /= spawn_state.difficulty;
+            spawn_state.remaining = spawn_state.rate * (1.0 + (Math.random() - 0.5) * spawn_state.variance);
+            spawn_state.remaining /= spawn_state.difficulty;
+        }
+
+        spawn_state.remaining -= 1.0;
+        spawn_state.difficulty += 1.0 / 60.0 / 60.0;
+    }
+    
+    if (spawn_state.wave_timer <= 0)
+    {
+        spawn_state.in_wave = !spawn_state.in_wave;
+
+        spawn_state.wave_timer = spawn_state.wave_length;
     }
 
-    spawn_state.remaining -= 1.0;
-    spawn_state.difficulty += 1.0 / 60.0 / 60.0;
+    spawn_state.wave_timer -= 1.0 / 60.0;
 }
