@@ -53,6 +53,6 @@ var enemy_ice_golem = {
     "img_type":"png",
     "health":5.0,
     "speed":0.05,
-    "cost":5.0,
+    "cost":10.0,
     "range":7
 }

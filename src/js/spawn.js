@@ -3,8 +3,8 @@ var spawn_state = {"power_modifier": 0.5, "distribution_factor": 1.0, "difficult
 var enemy_types = [
     {"name": "Snowflake", "type":enemy_white_snow, "description": "Just your run-of-the-mill snowflakes", "img": "snowflake", "speed": 1.0, "cost": 1.0, "health": 1.0},
     {"name": "Yellow Snowflake", "type":enemy_yellow_snow, "description": "Beware of the yellow snow, seriously, just don't ask", "img": "snowflake_yellow", "speed": 1.3, "cost": 2.0, "health": 2.0},
+    {"name": "Icicle", "type":enemy_icicle},
     {"name": "Ice Golem", "type":enemy_ice_golem},
-    {"name": "Icicle", "type":enemy_icicle}
 ]
 
 function spawn_new_enemy()
