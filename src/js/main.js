@@ -162,9 +162,6 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
             obj.frame_number = 0;
         }
     }
-
-    
-
     ctx.restore();
 
     if (typeof health_bar !== "undefined")
@@ -181,7 +178,7 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
     if (typeof range !== "undefined")
     {
         r = range * grid_size;
-        ctx.fillStyle = "#E0C0C040";
+        ctx.fillStyle = "#E0A0A07F";
         ctx.beginPath();
         ctx.ellipse(pos.x, pos.y, r, r, Math.PI / 4, 0, 2 * Math.PI);
         ctx.fill();
