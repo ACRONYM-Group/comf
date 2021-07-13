@@ -326,6 +326,19 @@ function click_empty()
     }
 }
 
+function try_purchase(money)
+{
+    if (cold_hard_cash >= money)
+    {
+        cold_hard_cash -= money;
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
 function click_canvas(canvas, x, y)
 {
     x -= canvas.width / 2;
@@ -353,9 +366,8 @@ function click_canvas(canvas, x, y)
             }
         }
 
-        if (cold_hard_cash >= tower_to_place.cost) {
+        if (try_purchase(tower_to_place.cost)) {
             game_objects.push(new tower(Math.round(x), Math.round(y), tower_to_place));
-            cold_hard_cash -= tower_to_place.cost;
         }
     }
     else

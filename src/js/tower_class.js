@@ -27,6 +27,8 @@ class tower {
 
         this.name = type.name;
 
+        this.cost = type.cost;
+
         this.upgrades = {"speed": 0, "damage": 0};
     }
 
@@ -51,13 +53,18 @@ class tower {
 
     upgrade_speed()
     {
-        console.log(this);
-        this.upgrades.speed += 1;
+        if (try_purchase(this.cost / 2 * Math.trunc(Math.pow(1.68, this.upgrades.speed + 1))))
+        {
+            this.upgrades.speed += 1;
+        }
     }
 
     upgrade_damage()
     {
-        this.upgrades.damage += 1;
+        if (try_purchase(this.cost / 2 * Math.trunc(Math.pow(1.68, this.upgrades.damage + 1))))
+        {
+            this.upgrades.damage += 1;
+        }
     }
 
     set_as_selected_menu(index)
