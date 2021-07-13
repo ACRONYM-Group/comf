@@ -51,9 +51,14 @@ class tower {
         
     }
 
+    get_upgrade_cost(upgrade)
+    {
+        return this.cost / 2 * Math.trunc(Math.pow(1.68, this.upgrades[upgrade] + 1));
+    }
+
     upgrade_speed()
     {
-        if (try_purchase(this.cost / 2 * Math.trunc(Math.pow(1.68, this.upgrades.speed + 1))))
+        if (try_purchase(this.get_upgrade_cost("speed")))
         {
             this.upgrades.speed += 1;
         }
@@ -61,7 +66,7 @@ class tower {
 
     upgrade_damage()
     {
-        if (try_purchase(this.cost / 2 * Math.trunc(Math.pow(1.68, this.upgrades.damage + 1))))
+        if (try_purchase(this.get_upgrade_cost("damage")))
         {
             this.upgrades.damage += 1;
         }
@@ -72,6 +77,9 @@ class tower {
         document.getElementById("selection_tower_name").innerText = this.name;
         document.getElementById("upgrade_speed_count").innerText = "Lvl " + this.upgrades.speed;
         document.getElementById("upgrade_damage_count").innerText = "Lvl " + this.upgrades.damage;
+
+        document.getElementById("upgrade_speed").innerText = "Upgrade Speed (" + this.get_upgrade_cost("speed") + ")"
+        document.getElementById("upgrade_damage").innerText = "Upgrade Damage (" + this.get_upgrade_cost("damage") + ")"
 
         let obj = this;
 
