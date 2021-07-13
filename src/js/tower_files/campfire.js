@@ -12,15 +12,16 @@ var tower_campfire = {
         
                 if (dist < this.range)
                 {
-                    enemies[i].damage(1);
+                    enemies[i].damage(1 + this.upgrades.damage);
                 }
             }
-            this.timer = 240;
+            this.timer = 240 / (1 + this.upgrades.speed);
         }
     },
     "img":"campfire",
     "img_type":"spritesheet",
     "range":3,
     "cost":50,
-    "health":20.0
+    "health":20.0,
+    "name": "Campfire"
 }

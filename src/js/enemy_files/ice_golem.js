@@ -4,7 +4,6 @@ var enemy_ice_golem = {
         let best = null;
         let best_dist = this.range * this.range;
         let best_i = null;
-        console.log(best_dist);
     
         for (i in game_objects)
         {
@@ -19,7 +18,6 @@ var enemy_ice_golem = {
             }
         }
     
-        console.log(best);
         if (best != null)
         {
             // var ctx = global_canvas.getContext("2d");
@@ -29,7 +27,6 @@ var enemy_ice_golem = {
     
             if (this.timer <= 0)
             {
-                console.log("ICE GOLEM ATTACK");
                 let attack = new ongoing_attack(this.x, this.y, "tower", best_i);
             
                 ongoing_attacks.push(attack);

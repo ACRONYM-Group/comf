@@ -20,9 +20,22 @@ var autostart = false;
 
 function draw()
 {
+    let something_selected = false;
+    for (i in game_objects)
+    {
+        let obj = game_objects[i];
 
-    // cold_hard_cash_display = document.getElementById("cold_hard_cash_display");
-    // cold_hard_cash_display.innerText = "$CHC " + cold_hard_cash;
+        if (obj.selected)
+        {
+            something_selected = true;
+
+            game_objects[i].set_as_selected_menu();
+
+            break;
+        }
+    }
+
+    document.getElementById("selection_data").style.display = something_selected ? "block" : "none";
 
     if (typeof global_canvas === "undefined")
     {
@@ -65,7 +78,6 @@ function draw_game(canvas, ctx)
     document.getElementById("health_value").innerHTML = comfort_value;
 
     back = get_image("Lizs_forest_post-logging");
-    console.log(canvas.width);
     ctx.drawImage(back, 0, 0,canvas.width,canvas.height-116);
     background_width = canvas.width;
     background_height = canvas.height-116;
@@ -93,7 +105,6 @@ function draw_game(canvas, ctx)
         draw_game_object(game_objects[t], canvas, ctx, game_objects[t].health / game_objects[t].max_health, game_objects[t].angle, range);
     }
 
-    console.log(tower_to_place);
     if (typeof tower_to_place !== "undefined")
     {
         let obj = new tower(cursor_pos.x, cursor_pos.y, tower_to_place);
@@ -127,7 +138,6 @@ function draw_game_object(obj, canvas, ctx, health_bar, angle, range, scale, alp
 
     pos = grid_to_coord(obj, canvas);
 
-    console.log(obj);
     img = get_image(obj.img);
 
     ctx.save();

@@ -49,6 +49,23 @@ z-index: 1;
     text-align: center;
 }
 
+#selection_data
+{
+    padding: 5px;
+    float: left;
+}
+
+#selection_tower_name
+{
+    float: left;
+}
+
+.upgrade_entry
+{
+    float: left;
+    padding: 5px;
+}
+
 .wave_control
 {
     float: right;

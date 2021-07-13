@@ -24,6 +24,10 @@ class tower {
         this.img_type = type.img_type;
 
         this.selected = false;
+
+        this.name = type.name;
+
+        this.upgrades = {"speed": 0, "damage": 0};
     }
 
     damage(amount) {
@@ -35,7 +39,7 @@ class tower {
         var i = 0;
         // this.health *= 0.99;
 
-        if (this.health < this.max_health * 0.01)
+        if (this.health <= 0)
         {
             i = game_objects.indexOf(this);
             game_objects.splice(i, 1);
@@ -43,5 +47,28 @@ class tower {
 
         this.attack();
         
+    }
+
+    upgrade_speed()
+    {
+        console.log(this);
+        this.upgrades.speed += 1;
+    }
+
+    upgrade_damage()
+    {
+        this.upgrades.damage += 1;
+    }
+
+    set_as_selected_menu(index)
+    {
+        document.getElementById("selection_tower_name").innerText = this.name;
+        document.getElementById("upgrade_speed_count").innerText = "Lvl " + this.upgrades.speed;
+        document.getElementById("upgrade_damage_count").innerText = "Lvl " + this.upgrades.damage;
+
+        let obj = this;
+
+        document.getElementById("upgrade_speed").onclick = function () { obj.upgrade_speed() };
+        document.getElementById("upgrade_damage").onclick = function () { obj.upgrade_damage() };
     }
 }

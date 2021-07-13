@@ -14,7 +14,6 @@ class enemy {
         this.timer = 0;
         this.range = type.range;
         this.move();
-        
     }
 
     move () {

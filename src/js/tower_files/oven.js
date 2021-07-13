@@ -28,11 +28,11 @@ var tower_oven = {
     
             if (this.timer <= 0)
             {
-                let attack = new ongoing_attack(this.x, this.y, "enemy", best_i);
+                let attack = new ongoing_attack(this.x, this.y, "enemy", best_i, 1 + this.upgrades.damage);
             
                 ongoing_attacks.push(attack);
     
-                this.timer = 60;
+                this.timer = 60 / (1 + this.upgrades.speed);
             }
     
             this.timer -= 1;
@@ -50,5 +50,6 @@ var tower_oven = {
     "img_type":"png",
     "range":7,
     "cost":100,
-    "health":20.0
+    "health":20.0,
+    "name": "Oven"
 }

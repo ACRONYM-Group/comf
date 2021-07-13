@@ -1,5 +1,5 @@
 class ongoing_attack {
-    constructor(x, y, target_type, target) {
+    constructor(x, y, target_type, target, damage) {
         this.target = target;
         this.target_type = target_type;
         this.progress = 0;
@@ -18,6 +18,15 @@ class ongoing_attack {
         this.y = y;
 
         this.find_target();
+
+        if (damage == undefined)
+        {
+            this.damage = 1;
+        }
+        else
+        {
+            this.damage = damage;
+        }
     }
 
     find_target() {
